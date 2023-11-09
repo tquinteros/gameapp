@@ -31,6 +31,11 @@ export const users = [
                 name: "Mining",
                 level: 1,
                 experience: 0,
+            },
+            {
+                name: "Woodcutting",
+                level: 1,
+                experience: 0,
             }
         ]
     },

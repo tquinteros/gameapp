@@ -32,7 +32,7 @@ const LoginTemplate = () => {
         const foundUser = users.find(user => user.username === username && user.password === password)
         if (foundUser) {
             dispatch(logIn({ username, isAdmin: foundUser.isAdmin, gold: foundUser.gold, level: foundUser.level, experience: foundUser.experience, skillsLevels: foundUser.skillsLevels}));
-            router.push('/app/works');
+            router.push('/app/');
             toast.success(`Welcome ${username}`)
         }
         if (!foundUser) {
@@ -51,7 +51,7 @@ const LoginTemplate = () => {
         <div
             style={{ height: `calc(100vh - ${headerHeight}px)` }}
             className="flex items-center justify-center">
-            <form onSubmit={handleSubmit} className="flex justify-center flex-col gap-8 items-center border-2 border-black px-24 py-16 rounded-lg">
+            <form onSubmit={handleSubmit} className="flex test justify-center flex-col gap-8 items-center border-2 border-black w-[90%] md:w-[60%] lg:w-[30%] h-[500px] rounded-lg">
                 <h3>User: admin | Password: admin</h3>
                 <h3>User: user | Password: user</h3>
                 <div className="flex flex-col gap-4">
