@@ -13,7 +13,7 @@ const InventoryTemplate = () => {
     const freeSlots = user.inventorySlots - user.inventory.length;
 
     const handleAddInventorySlots = () => {
-        if(user.inventorySlots >= 100) {
+        if (user.inventorySlots >= 100) {
             toast.error("You can't have more than 100 slots")
             return;
         }
@@ -32,10 +32,11 @@ const InventoryTemplate = () => {
             </h3>
             <div className="flex flex-wrap justify-center items-center gap-4 mt-8">
                 {
-                    user.inventory.map((item) => {
+                    user.inventory.map((item, index) => {
+                        const uniqueKey = `${item.id}*${crypto.randomUUID()}`;
                         return (
-                            <InventoryItem item={item} key={item.id} />
-                        )
+                            <InventoryItem item={item} key={uniqueKey} />
+                        );
                     })
                 }
                 {

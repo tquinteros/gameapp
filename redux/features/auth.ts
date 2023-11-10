@@ -1,7 +1,8 @@
 import { miningLevels } from "@/data/levels";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { ItemProps } from "@/types/types";
+import { ItemProps, InventoryItem } from "@/types/types";
+
 type SkillLevel = {
     name: string;
     level: number;
@@ -22,7 +23,7 @@ type AuthState = {
     experience: number;
     inventorySlots: number;
     skillsLevels: SkillLevel[];
-    inventory: ItemProps[];
+    inventory: InventoryItem[];
 };
 
 const initialState: InitialState = {
@@ -45,7 +46,7 @@ export const auth = createSlice({
     initialState,
     reducers: {
         logOut: () => initialState,
-        logIn: (state, action: PayloadAction<{ username: string; isAdmin: boolean; level: number; gold: number; experience: number; skillsLevels: SkillLevel[]; inventory: ItemProps[]; inventorySlots: number; }>) => {
+        logIn: (state, action: PayloadAction<{ username: string; isAdmin: boolean; level: number; gold: number; experience: number; skillsLevels: SkillLevel[]; inventory: InventoryItem[]; inventorySlots: number; }>) => {
             const { username, isAdmin, level, experience, skillsLevels, gold, inventory, inventorySlots } = action.payload;
             return {
                 value: {
@@ -106,12 +107,40 @@ export const auth = createSlice({
             state.value.gold -= action.payload;
         },
         addItemToInventory: (state, action: PayloadAction<ItemProps>) => {
-            state.value.inventory.push(action.payload);
+            const newItem: ItemProps = {
+                id: action.payload.id,
+                name: action.payload.name,
+                price: action.payload.price,
+                type: action.payload.type,
+                description: action.payload.description,
+                image: action.payload.image,
+                level: action.payload.level,
+                quantity: 1,
+                category: action.payload.category,
+            };
+
+            const existingItem = state.value.inventory.find(item => item.id === newItem.id);
+
+            if (existingItem) {
+                if (existingItem.quantity !== undefined) {
+                    existingItem.quantity += newItem.quantity || 0;
+                } else {
+                    existingItem.quantity = newItem.quantity || 0;
+                }
+            } else {
+                state.value.inventory.push(newItem);
+            }
         },
         removeItemFromInventory: (state, action: PayloadAction<ItemProps>) => {
             const itemIndex = state.value.inventory.findIndex((item) => item.id === action.payload.id);
             if (itemIndex !== -1) {
-                state.value.inventory.splice(itemIndex, 1);
+                const currentItem = state.value.inventory[itemIndex];
+                if (currentItem.quantity && currentItem.quantity > 1) {
+                    currentItem.quantity -= 1;
+                }
+                else {
+                    state.value.inventory.splice(itemIndex, 1);
+                }
             }
         },
         addInventorySlots: (state, action: PayloadAction<number>) => {

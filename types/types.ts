@@ -1,13 +1,25 @@
 export type ItemProps = {
-  id: number,
-  name: string,
-  price: number,
-  type: string,
-  description?: string,
-  image: string,
-  level?: number,
-  quantity?: number,
-  category: string,
+  id: number;
+  name: string;
+  price: number;
+  type: string;
+  description?: string;
+  image: string;
+  level?: number;
+  quantity?: number;
+  category: string;
+};
+
+export type InventoryItem = {
+  id: number;
+  name: string;
+  price: number;
+  type: string;
+  description?: string;
+  image: string;
+  level?: number;
+  quantity?: number;
+  category: string;
 };
 
 export type MineralProps = {
@@ -16,6 +28,7 @@ export type MineralProps = {
   itemImg: string;
   experience: number;
   delay: number;
+  type: string;
   levelRequired: number;
   requiredPickaxe: string;
   percentageGold: number;

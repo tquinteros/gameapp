@@ -14,27 +14,30 @@ const ItemDetail = ({ item }: { item: ItemProps }) => {
     const user = useAppSelector((state) => state.authReducer.value);
     
     const handleBuyItem = (item: ItemProps) => {
-        
         if (userBalance < item.price) {
-            toast.error("You don't have enough gold")
-            return
-        }
-    
-        const hasItem = user.inventory.some((inventoryItem) => inventoryItem.name === item.name);
-        if (hasItem && (item.type === "tool" || item.type === "armor")) {
-            toast.error(`You already have ${item.name} in your inventory!`);
+            toast.error("You don't have enough gold");
             return;
         }
     
-        if (user.inventory.length >= 50) {
-            toast.error("You can't have more than 50 items")
-            return
+        const hasItem = user.inventory.some(
+            (inventoryItem) => inventoryItem.id === item.id && inventoryItem.quantity === undefined
+        );
+    
+        if (hasItem && (item.category === "tool" || item.category === "armor")) {
+            toast.error(`You already have this item in your inventory!`);
+            return;
         }
     
-        dispatch(removeGold(item.price))
-        dispatch(addItemToInventory(item))
-        toast.success(`You bought ${item.name} for ${item.price} gold!`)
-    }
+        if (user.inventory.length >= user.inventorySlots) {
+            toast.error(`You can't have more than ${user.inventorySlots} items`);
+            return;
+        }
+    
+        dispatch(removeGold(item.price));
+        dispatch(addItemToInventory(item));
+        toast.success(`You bought this item for ${item.price} gold!`);
+    };
+    
 
     return (
         <div  

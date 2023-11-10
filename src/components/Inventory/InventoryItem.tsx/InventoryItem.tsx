@@ -10,12 +10,13 @@ import { ItemProps } from "@/types/types";
 const InventoryItem = ({ item }: { item: ItemProps }) => {
 
     const dispatch = useDispatch();
-    const userBalance = useAppSelector((state) => state.authReducer.value.gold);
+    const user = useAppSelector((state) => state.authReducer.value);
 
     const handleRemoveItem = (item: ItemProps) => {
         dispatch(removeItemFromInventory(item))
-        dispatch(addGold(item.price))
-        toast.success(`You sold ${item.name} for ${item.price} gold!`)
+        dispatch(addGold(item.price * 0.8))
+        console.log(user.inventory, "INVENTORY")
+        toast.success(`You sold ${item.name} for ${item.price * 0.8} gold!`)
     }
 
     return (
@@ -27,6 +28,7 @@ const InventoryItem = ({ item }: { item: ItemProps }) => {
                 <div className="flex flex-col">
                     <span>{item.name}</span>
                     <span>Description: {item.description}</span>
+                    <span>{item.quantity}</span>
                 </div>
             </Tooltip>
         </div>
