@@ -10,7 +10,7 @@ import { levels } from '@/data/levels';
 import { toggleFlag } from "@/redux/features/flag";
 import { MineralProps } from "@/types/types";
 
-const MineralCard = ({ mineral }: { mineral: MineralProps }) => {
+const WoodCuttingCard = ({ mineral }: { mineral: MineralProps }) => {
 
 
     const dispatch = useDispatch();
@@ -29,30 +29,30 @@ const MineralCard = ({ mineral }: { mineral: MineralProps }) => {
     }
 
     const handleAddMiningExperience = (experience: number, delay: number) => {
-        const miningSkill = findUserSkill("Mining");
+        const skill = findUserSkill("Woodcutting");
         const currentLevelThreshold = levels[user.level].experience;
-        if (!miningSkill) {
+        if (!skill) {
             return;
         }
 
-        if (miningSkill.level < mineral.levelRequired) {
+        if (skill.level < mineral.levelRequired) {
             toast.error(`You need to be at least level ${mineral.levelRequired} to mine this mineral!`, {
-                icon: "⛏",
+                icon: "🪓",
                 autoClose: 2000,
             });
             return;
         }
 
-        if (!user.inventory.some((item) => item.category === "pickaxe" && item.tier && item.tier >= mineral.requiredTier)) {
-            toast.error(`You need a tier ${mineral.requiredTier} pickaxe to mine this mineral!`, {
-                icon: "⛏",
+        if (!user.inventory.some((item) => item.category === "axe" && item.tier && item.tier >= mineral.requiredTier)) {
+            toast.error(`You need a tier ${mineral.requiredTier} axe to mine this mineral!`, {
+                icon: "🪓",
                 autoClose: 2000,
             });
             return;
         }
 
-        const currentMiningLevel = miningSkill.level;
-        const currentMiningExperience = miningSkill.experience;
+        const currentMiningLevel = skill.level;
+        const currentMiningExperience = skill.experience;
         const currentMiningLevelThreshold = miningLevels[currentMiningLevel - 1].experience;
 
         if (currentMiningExperience + experience >= currentMiningLevelThreshold) {
@@ -62,9 +62,9 @@ const MineralCard = ({ mineral }: { mineral: MineralProps }) => {
                 setProgress(currentProgress);
                 if (currentProgress >= 100) {
                     clearInterval(interval);
-                    dispatch(addLevelSkill({ skillName: "Mining", level: 1 }));
-                    dispatch(addExperienceSkill({ skillName: "Mining", experience: currentMiningExperience + experience - currentMiningLevelThreshold }));
-                    dispatch(addExperienceSkill({ skillName: "Mining", experience: -currentMiningExperience }));
+                    dispatch(addLevelSkill({ skillName: "Woodcutting", level: 1 }));
+                    dispatch(addExperienceSkill({ skillName: "Woodcutting", experience: currentMiningExperience + experience - currentMiningLevelThreshold }));
+                    dispatch(addExperienceSkill({ skillName: "Woodcutting", experience: -currentMiningExperience }));
                     if (user.experience + 1 >= currentLevelThreshold) {
                         dispatch(addLevel(1));
                         dispatch(addExperience(-user.experience));
@@ -81,7 +81,7 @@ const MineralCard = ({ mineral }: { mineral: MineralProps }) => {
                 setProgress(currentProgress);
                 if (currentProgress >= 100) {
                     clearInterval(interval);
-                    dispatch(addExperienceSkill({ skillName: "Mining", experience: experience }));
+                    dispatch(addExperienceSkill({ skillName: "Woodcutting", experience: experience }));
                     if (user.experience + 1 >= currentLevelThreshold) {
                         dispatch(addLevel(1));
                         dispatch(addExperience(-user.experience));
@@ -89,7 +89,7 @@ const MineralCard = ({ mineral }: { mineral: MineralProps }) => {
                         dispatch(addExperience(1));
                     }
                     toast.success(`+${experience}XP`, {
-                        icon: "⛏",
+                        icon: "🪓",
                         autoClose: 1000,
                     });
                     const randomValue = Math.random();
@@ -105,8 +105,8 @@ const MineralCard = ({ mineral }: { mineral: MineralProps }) => {
     return (
         <div className="col-span-12 relative bg-[#3c3f50] rounded-lg md:col-span-6 lg:col-span-4 xl:col-span-3 p-4 flex flex-col gap-3">
             <div className="absolute top-2 left-2">
-                {findUserSkill("Mining")?.level !== undefined ? (
-                    findUserSkill("Mining")?.level < mineral.levelRequired ? (
+                {findUserSkill("Woodcutting")?.level !== undefined ? (
+                    findUserSkill("Woodcutting")?.level < mineral.levelRequired ? (
                         <span className="absolute top-0 left-0 text-white w-48 text-center px-8 py-1.5 rounded-lg border-white border-2 bg-[#0000004D] backdrop-blur-2xl">Level {mineral.levelRequired} required</span>
                     ) : (
                         null
@@ -134,4 +134,4 @@ const MineralCard = ({ mineral }: { mineral: MineralProps }) => {
     )
 }
 
-export default MineralCard;
+export default WoodCuttingCard;

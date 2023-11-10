@@ -1,5 +1,5 @@
 import { useAppSelector } from "@/redux/store";
-import React from "react";
+import React, { useState } from "react";
 import InventoryItem from "./InventoryItem.tsx/InventoryItem";
 import Link from "next/link";
 import { addInventorySlots, removeGold } from "@/redux/features/auth";
@@ -11,21 +11,49 @@ const InventoryTemplate = () => {
     const dispatch = useDispatch();
     const user = useAppSelector((state) => state.authReducer.value);
     const freeSlots = user.inventorySlots - user.inventory.length;
+    const [inventoryPrice, setInventoryPrice] = useState(100);
+    const [purchaseCount, setPurchaseCount] = useState(0);
+
+    const calculateNewSlotPrice = () => {
+        if (user.inventorySlots >= 100) {
+            return 0;
+        }
+        const newSlotPrice = Math.round(100 * Math.pow(1.2, purchaseCount + 1));
+        return newSlotPrice;
+    };
 
     const handleAddInventorySlots = () => {
         if (user.inventorySlots >= 100) {
-            toast.error("You can't have more than 100 slots")
+            toast.error("You can't have more than 100 slots");
             return;
         }
-        dispatch(addInventorySlots(5))
-        dispatch(removeGold(100))
-    }
+
+        const newSlotPrice = calculateNewSlotPrice();
+        dispatch(addInventorySlots(5));
+        dispatch(removeGold(newSlotPrice));
+        toast.success(`You bought 5 slots for ${newSlotPrice} gold!`);
+        setPurchaseCount((prevCount) => prevCount + 1);
+    };
 
     return (
         <div>
             <div className="flex justify-between">
                 <h3 className="text-xl text-center uppercase">Inventory</h3>
-                <button onClick={handleAddInventorySlots} className="text-xl border p-2 rounded-lg">BUY +5 SLOTS</button>
+                <div className="flex flex-col gap-1 items-center">
+                    {
+                        user.inventorySlots < 100 ? (
+                            <>
+                                <button onClick={handleAddInventorySlots} className="text-xl border p-2 rounded-lg">
+                                    Buy +5 slots
+                                </button>
+                                <span>🟡{calculateNewSlotPrice()}</span>
+
+                            </>
+                        ) : (
+                            <span>Full Inventory</span>
+                        )
+                    }
+                </div>
             </div>
             <h3 className="text-xl uppercase">
                 {user.inventory.length} / {user.inventorySlots}

@@ -28,7 +28,7 @@ const InventoryItem = ({ item }: { item: ItemProps }) => {
                 <Tooltip id={`tooltip-${item.id}`}>
                     <div className="flex flex-col">
                         <span>{item.name}</span>
-                        <span>Tier {item.tier}</span>
+                        {item.tier && <span>Tier {item.tier}</span> }
                         <span>Description: {item.description}</span>
                     </div>
                 </Tooltip>

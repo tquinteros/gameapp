@@ -6,6 +6,8 @@ import React, { useEffect } from "react"
 import { toast } from "react-toastify";
 import Link from "next/link";
 import AppLayout from "@/src/components/AppLayout/AppLayout";
+import WoodCuttingTemplate from "@/src/components/WoodcuttingTemplate/WoodCuttingTemplate";
+
 
 
 export default function Home() {
@@ -22,7 +24,7 @@ export default function Home() {
 
   return (
     <AppLayout>
-      WOODCUTTING
+      <WoodCuttingTemplate />
     </AppLayout>
   )
 }
