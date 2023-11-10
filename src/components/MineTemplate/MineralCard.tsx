@@ -40,7 +40,6 @@ const MineralCard = ({ mineral }: { mineral: Mineral }) => {
 
     const handleAddMiningExperience = (experience: number, delay: number) => {
         const miningSkill = findUserSkill("Mining");
-        // map user.inventory and check if user has a pickaxe that matches the mineral.required and if dont have it, return
         const currentLevelThreshold = levels[user.level].experience;
         if (!miningSkill) {
             return;
@@ -76,10 +75,6 @@ const MineralCard = ({ mineral }: { mineral: Mineral }) => {
                     dispatch(addLevelSkill({ skillName: "Mining", level: 1 }));
                     dispatch(addExperienceSkill({ skillName: "Mining", experience: currentMiningExperience + experience - currentMiningLevelThreshold }));
                     dispatch(addExperienceSkill({ skillName: "Mining", experience: -currentMiningExperience }));
-                    // toast.success(`You have leveled up your Mining skill to level ${currentMiningLevel + 1}!`, {
-                    //     icon: "⛏",
-                    //     autoClose: 2000,
-                    // });
                     if (user.experience + 1 >= currentLevelThreshold) {
                         dispatch(addLevel(1));
                         dispatch(addExperience(-user.experience));

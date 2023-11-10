@@ -35,14 +35,14 @@ const ItemDetail = ({ item }: { item: Item }) => {
             return;
         }
     
-        if (user.inventory.length >= 10) {
-            toast.error("You can't have more than 10 items")
+        if (user.inventory.length >= 50) {
+            toast.error("You can't have more than 50 items")
             return
         }
     
         dispatch(removeGold(item.price))
-        console.log("Item added", item)
         dispatch(addItemToInventory(item))
+        toast.success(`You bought ${item.name} for ${item.price} gold!`)
     }
 
     return (

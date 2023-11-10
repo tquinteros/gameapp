@@ -115,6 +115,12 @@ export const auth = createSlice({
         addItemToInventory: (state, action: PayloadAction<Item>) => {
             state.value.inventory.push(action.payload);
         },
+        removeItemFromInventory: (state, action: PayloadAction<Item>) => {
+            const itemIndex = state.value.inventory.findIndex((item) => item.id === action.payload.id);
+            if (itemIndex !== -1) {
+                state.value.inventory.splice(itemIndex, 1);
+            }
+        },
     },
 });
 
@@ -128,5 +134,6 @@ export const { logIn,
     addGold,
     removeGold,
     addItemToInventory,
+    removeItemFromInventory,
 } = auth.actions;
 export default auth.reducer;
