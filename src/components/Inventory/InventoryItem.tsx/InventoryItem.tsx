@@ -20,17 +20,19 @@ const InventoryItem = ({ item }: { item: ItemProps }) => {
     }
 
     return (
-        <div
-            onClick={() => handleRemoveItem(item)}
-            className="flex flex-col border-2 rounded-md border-gray-300 w-16 h-16 items-center justify-center cursor-pointer" data-tooltip-id={`tooltip-${item.id}`}>
-            <Image src={item.image} alt={item.name} width={50} height={50} />
-            <Tooltip id={`tooltip-${item.id}`}>
-                <div className="flex flex-col">
-                    <span>{item.name}</span>
-                    <span>Description: {item.description}</span>
-                    <span>{item.quantity}</span>
-                </div>
-            </Tooltip>
+        <div className="flex flex-col items-center">
+            <div
+                onClick={() => handleRemoveItem(item)}
+                className="flex flex-col border-2 rounded-md border-gray-300 w-16 h-16 items-center justify-center cursor-pointer" data-tooltip-id={`tooltip-${item.id}`}>
+                <Image src={item.image} alt={item.name} width={50} height={50} />
+                <Tooltip id={`tooltip-${item.id}`}>
+                    <div className="flex flex-col">
+                        <span>{item.name}</span>
+                        <span>Description: {item.description}</span>
+                    </div>
+                </Tooltip>
+            </div>
+            <span>{item.quantity}</span>
         </div>
     )
 }

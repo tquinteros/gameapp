@@ -41,10 +41,14 @@ const InventoryTemplate = () => {
                 }
                 {
                     Array.from(Array(freeSlots)).map((_, index) => {
+                        const randomId = crypto.randomUUID();
                         return (
-                            <Link href="/app/shop" className="flex flex-col justify-center items-center border-2 border-gray-300 rounded-md w-16 h-16" key={index}>
+                            <div className="flex flex-col items-center" key={randomId}>
+                                <Link href="/app/shop" className="flex flex-col justify-center items-center border-2 border-gray-300 rounded-md w-16 h-16" key={index}>
 
-                            </Link>
+                                </Link>
+                                0
+                            </div>
                         )
                     })
                 }
