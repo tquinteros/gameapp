@@ -8,19 +8,9 @@ import { useAppSelector } from "@/redux/store";
 import { toast } from "react-toastify";
 import { levels } from '@/data/levels';
 import { toggleFlag } from "@/redux/features/flag";
+import { MineralProps } from "@/types/types";
 
-type Mineral = {
-    name: string;
-    materialImg: string;
-    itemImg: string;
-    experience: number;
-    delay: number;
-    levelRequired: number;
-    requiredPickaxe: string;
-    percentageGold: number;
-}
-
-const MineralCard = ({ mineral }: { mineral: Mineral }) => {
+const MineralCard = ({ mineral }: { mineral: MineralProps }) => {
 
 
     const dispatch = useDispatch();

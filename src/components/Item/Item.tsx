@@ -5,24 +5,15 @@ import { addItemToInventory, removeGold, addExperience } from "@/redux/features/
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/redux/store";
 import { toast } from "react-toastify";
+import { ItemProps } from "@/types/types";
 
-type Item = {
-    name: string,
-    price: number,
-    type: string,
-    description: string,
-    image: string,
-    level: number,
-    id: number
-}
-
-const ItemDetail = ({ item }: { item: Item }) => {
+const ItemDetail = ({ item }: { item: ItemProps }) => {
 
     const dispatch = useDispatch();
     const userBalance = useAppSelector((state) => state.authReducer.value.gold);
     const user = useAppSelector((state) => state.authReducer.value);
     
-    const handleBuyItem = (item: Item) => {
+    const handleBuyItem = (item: ItemProps) => {
         
         if (userBalance < item.price) {
             toast.error("You don't have enough gold")

@@ -1,21 +1,11 @@
 import { miningLevels } from "@/data/levels";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-
+import { ItemProps } from "@/types/types";
 type SkillLevel = {
     name: string;
     level: number;
     experience: number;
-};
-
-type Item = {
-    name: string,
-    price: number,
-    type: string,
-    description: string,
-    image: string,
-    level: number,
-    id: number,
 };
 
 type InitialState = {
@@ -31,7 +21,7 @@ type AuthState = {
     gold: number;
     experience: number;
     skillsLevels: SkillLevel[];
-    inventory: Item[];
+    inventory: ItemProps[];
 };
 
 const initialState: InitialState = {
@@ -53,7 +43,7 @@ export const auth = createSlice({
     initialState,
     reducers: {
         logOut: () => initialState,
-        logIn: (state, action: PayloadAction<{ username: string; isAdmin: boolean; level: number; gold: number; experience: number; skillsLevels: SkillLevel[]; inventory: Item[] }>) => {
+        logIn: (state, action: PayloadAction<{ username: string; isAdmin: boolean; level: number; gold: number; experience: number; skillsLevels: SkillLevel[]; inventory: ItemProps[] }>) => {
             const { username, isAdmin, level, experience, skillsLevels, gold, inventory } = action.payload;
             return {
                 value: {
@@ -112,10 +102,10 @@ export const auth = createSlice({
         removeGold: (state, action: PayloadAction<number>) => {
             state.value.gold -= action.payload;
         },
-        addItemToInventory: (state, action: PayloadAction<Item>) => {
+        addItemToInventory: (state, action: PayloadAction<ItemProps>) => {
             state.value.inventory.push(action.payload);
         },
-        removeItemFromInventory: (state, action: PayloadAction<Item>) => {
+        removeItemFromInventory: (state, action: PayloadAction<ItemProps>) => {
             const itemIndex = state.value.inventory.findIndex((item) => item.id === action.payload.id);
             if (itemIndex !== -1) {
                 state.value.inventory.splice(itemIndex, 1);

@@ -5,23 +5,14 @@ import { addItemToInventory, removeGold, addExperience, removeItemFromInventory,
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/redux/store";
 import { toast } from "react-toastify";
+import { ItemProps } from "@/types/types";
 
-type Item = {
-    name: string,
-    price: number,
-    type: string,
-    description: string,
-    image: string,
-    level: number,
-    id: number
-}
-
-const InventoryItem = ({ item }: { item: Item }) => {
+const InventoryItem = ({ item }: { item: ItemProps }) => {
 
     const dispatch = useDispatch();
     const userBalance = useAppSelector((state) => state.authReducer.value.gold);
 
-    const handleRemoveItem = (item: Item) => {
+    const handleRemoveItem = (item: ItemProps) => {
         dispatch(removeItemFromInventory(item))
         dispatch(addGold(item.price))
         toast.success(`You sold ${item.name} for ${item.price} gold!`)
