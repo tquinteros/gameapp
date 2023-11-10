@@ -129,7 +129,7 @@ export const Header = () => {
                             initial={{ opacity: 0, x: 200 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.5 }}
-                            className="flex flex-col h-fit p-4 rounded-md w-64 bg-black z-[9999] absolute top-16 -right-2 gap-8">
+                            className="flex flex-col h-fit p-4 rounded-md w-64 bg-black z-[9999] absolute top-16 -right-2 gap-4">
                             {navLinks.map((navLink) => (
                                 <span key={navLink.name}>
                                     <Link href={navLink.href}>{navLink.name}</Link>

@@ -37,7 +37,7 @@ const InventoryTemplate = () => {
 
     return (
         <div>
-            <div className="flex justify-between">
+            <div className="flex items-center justify-between">
                 <h3 className="text-xl text-center uppercase">Inventory</h3>
                 <div className="flex flex-col gap-1 items-center">
                     {
