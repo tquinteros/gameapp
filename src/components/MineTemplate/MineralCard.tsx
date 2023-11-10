@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/redux/store";
 import { toast } from "react-toastify";
 import { levels } from '@/data/levels';
+import { toggleFlag } from "@/redux/features/flag";
 
 type Mineral = {
     name: string;
@@ -15,6 +16,7 @@ type Mineral = {
     experience: number;
     delay: number;
     levelRequired: number;
+    requiredPickaxe: string;
     percentageGold: number;
 }
 
@@ -22,11 +24,14 @@ const MineralCard = ({ mineral }: { mineral: Mineral }) => {
 
 
     const dispatch = useDispatch();
-    const username = useAppSelector((state) => state.authReducer.value);
+    const [isWorking, setIsWorking] = useState(false);
+    const user = useAppSelector((state) => state.authReducer.value);
+    const flagValue = useAppSelector((state) => state.flagReducer.enabled);
+
     const [progress, setProgress] = useState(0);
 
     const findUserSkill = (skillName: string) => {
-        return username.skillsLevels.find(skill => skill.name === skillName);
+        return user.skillsLevels.find(skill => skill.name === skillName) || { level: 0, experience: 0 };
     };
 
     const convertMsToSeconds = (ms: number) => {
@@ -35,8 +40,25 @@ const MineralCard = ({ mineral }: { mineral: Mineral }) => {
 
     const handleAddMiningExperience = (experience: number, delay: number) => {
         const miningSkill = findUserSkill("Mining");
-        const currentLevelThreshold = levels[username.level].experience;
+        // map user.inventory and check if user has a pickaxe that matches the mineral.required and if dont have it, return
+        const currentLevelThreshold = levels[user.level].experience;
         if (!miningSkill) {
+            return;
+        }
+
+        if (miningSkill.level < mineral.levelRequired) {
+            toast.error(`You need to be at least level ${mineral.levelRequired} to mine this mineral!`, {
+                icon: "⛏",
+                autoClose: 2000,
+            });
+            return;
+        }
+
+        if (!user.inventory.some((item) => item.type === mineral.requiredPickaxe)) {
+            toast.error(`You need a ${mineral.requiredPickaxe} pickaxe to mine this mineral!`, {
+                icon: "⛏",
+                autoClose: 2000,
+            });
             return;
         }
 
@@ -58,9 +80,9 @@ const MineralCard = ({ mineral }: { mineral: Mineral }) => {
                     //     icon: "⛏",
                     //     autoClose: 2000,
                     // });
-                    if (username.experience + 1 >= currentLevelThreshold) {
+                    if (user.experience + 1 >= currentLevelThreshold) {
                         dispatch(addLevel(1));
-                        dispatch(addExperience(-username.experience));
+                        dispatch(addExperience(-user.experience));
                     } else {
                         dispatch(addExperience(1));
                     }
@@ -75,9 +97,9 @@ const MineralCard = ({ mineral }: { mineral: Mineral }) => {
                 if (currentProgress >= 100) {
                     clearInterval(interval);
                     dispatch(addExperienceSkill({ skillName: "Mining", experience: experience }));
-                    if (username.experience + 1 >= currentLevelThreshold) {
+                    if (user.experience + 1 >= currentLevelThreshold) {
                         dispatch(addLevel(1));
-                        dispatch(addExperience(-username.experience));
+                        dispatch(addExperience(-user.experience));
                     } else {
                         dispatch(addExperience(1));
                     }
@@ -96,11 +118,20 @@ const MineralCard = ({ mineral }: { mineral: Mineral }) => {
     };
 
     return (
-        <div className="col-span-12 bg-[#3c3f50] rounded-lg md:col-span-6 lg:col-span-4 xl:col-span-3 p-4 flex flex-col gap-3">
+        <div className="col-span-12 relative bg-[#3c3f50] rounded-lg md:col-span-6 lg:col-span-4 xl:col-span-3 p-4 flex flex-col gap-3">
+            <div className="absolute top-2 left-2">
+                {findUserSkill("Mining")?.level !== undefined ? (
+                    findUserSkill("Mining")?.level < mineral.levelRequired ? (
+                        <span className="absolute top-0 left-0 text-white w-48 text-center px-8 py-1.5 rounded-lg border-white border-2 bg-[#0000004D] backdrop-blur-2xl">Level {mineral.levelRequired} required</span>
+                    ) : (
+                        null
+                    )
+                ) : null}
+            </div>
             <div className="flex justify-center">
                 <Image src={mineral.materialImg} alt={mineral.name} width={125} className="" height={125} />
             </div>
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-2">
                 <h3 className="text-xl font-bold text-center">{mineral.name}</h3>
                 <span className="flex items-center gap-0.5 justify-center">{mineral.experience} XP / {
                     convertMsToSeconds(mineral.delay)
@@ -111,8 +142,8 @@ const MineralCard = ({ mineral }: { mineral: Mineral }) => {
                 <div className="h-full bg-green-700/100" style={{ width: `${progress}%` }}></div>
             </div>
             <button
-                disabled={progress > 0}
-                className={`w-full py-2 test text-white rounded ${progress > 0 ? "opacity-50 cursor-not-allowed" : ""}`} onClick={() => handleAddMiningExperience(mineral.experience, mineral.delay)}>Mine
+                disabled={progress > 0 || flagValue}
+                className={`w-full hover:opacity-75 duration-300 py-2 test text-white rounded ${progress > 0 ? "opacity-50 cursor-not-allowed" : ""}`} onClick={() => handleAddMiningExperience(mineral.experience, mineral.delay)}>Mine
             </button>
         </div>
     )

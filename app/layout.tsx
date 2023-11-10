@@ -1,11 +1,9 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import Header from '@/src/components/Header/Header'
 import { ReduxProvider } from '@/redux/provider'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-import SideLayout from '@/src/components/SideLayout/SideLayout'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -33,7 +31,7 @@ export default function RootLayout({
               {children}
             </div>
           </div> */}
-          <ToastContainer position='bottom-center' theme='dark' hideProgressBar={false} closeOnClick={true} pauseOnHover={true} draggable={true} />
+          <ToastContainer position='bottom-right' theme='dark' hideProgressBar={false} closeOnClick={true} pauseOnHover={true} draggable={true} />
         </ReduxProvider>
       </body>
     </html>

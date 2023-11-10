@@ -4,7 +4,7 @@ export const users = [
         password: "admin",
         isAdmin: true,
         level: 1,
-        gold: 20,
+        gold: 10000,
         experience: 0,
         skillsLevels: [
             {
@@ -17,7 +17,8 @@ export const users = [
                 level: 1,
                 experience: 0,
             }
-        ]
+        ],
+        inventory: [],
     },
     {
         username: "user",
@@ -37,6 +38,7 @@ export const users = [
                 level: 1,
                 experience: 0,
             }
-        ]
+        ],
+        inventory: [],
     },
 ]

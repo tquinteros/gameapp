@@ -1,6 +1,7 @@
 "use client"
 import { useAppSelector } from "@/redux/store"
 import AppLayout from "@/src/components/AppLayout/AppLayout";
+import ShopTemplate from "@/src/components/ShopTemplate/ShopTemplate";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react"
 import { toast } from "react-toastify";
@@ -20,7 +21,7 @@ export default function Home() {
 
   return (
     <AppLayout>
-      ESTE ES EL HOME
+      <ShopTemplate />
     </AppLayout>
   )
 }

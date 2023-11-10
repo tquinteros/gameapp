@@ -8,6 +8,16 @@ type SkillLevel = {
     experience: number;
 };
 
+type Item = {
+    name: string,
+    price: number,
+    type: string,
+    description: string,
+    image: string,
+    level: number,
+    id: number,
+};
+
 type InitialState = {
     value: AuthState;
 };
@@ -21,6 +31,7 @@ type AuthState = {
     gold: number;
     experience: number;
     skillsLevels: SkillLevel[];
+    inventory: Item[];
 };
 
 const initialState: InitialState = {
@@ -32,6 +43,7 @@ const initialState: InitialState = {
         level: 0,
         experience: 0,
         skillsLevels: [],
+        inventory: [],
         gold: 0,
     },
 };
@@ -41,8 +53,8 @@ export const auth = createSlice({
     initialState,
     reducers: {
         logOut: () => initialState,
-        logIn: (state, action: PayloadAction<{ username: string; isAdmin: boolean; level: number; gold: number; experience: number; skillsLevels: SkillLevel[] }>) => {
-            const { username, isAdmin, level, experience, skillsLevels, gold } = action.payload;
+        logIn: (state, action: PayloadAction<{ username: string; isAdmin: boolean; level: number; gold: number; experience: number; skillsLevels: SkillLevel[]; inventory: Item[] }>) => {
+            const { username, isAdmin, level, experience, skillsLevels, gold, inventory } = action.payload;
             return {
                 value: {
                     isAuthenticated: true,
@@ -53,6 +65,7 @@ export const auth = createSlice({
                     level,
                     experience,
                     skillsLevels,
+                    inventory,
                 },
             };
         },
@@ -99,6 +112,9 @@ export const auth = createSlice({
         removeGold: (state, action: PayloadAction<number>) => {
             state.value.gold -= action.payload;
         },
+        addItemToInventory: (state, action: PayloadAction<Item>) => {
+            state.value.inventory.push(action.payload);
+        },
     },
 });
 
@@ -110,6 +126,7 @@ export const { logIn,
     addExperienceSkill,
     addLevelSkill,
     addGold,
-    removeGold 
+    removeGold,
+    addItemToInventory,
 } = auth.actions;
 export default auth.reducer;

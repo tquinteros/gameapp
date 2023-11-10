@@ -8,8 +8,8 @@ export const navLinks = [
         href: '/app/works',
     },
     {
-        name: 'Ranking',
-        href: '/app',
+        name: 'Shop',
+        href: '/app/shop',
     },
     {
         name: 'Quests',
