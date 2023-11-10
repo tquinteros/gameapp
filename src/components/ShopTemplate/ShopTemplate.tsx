@@ -14,7 +14,7 @@ const ShopTemplate = () => {
         <div className="flex gap-8">
             {Object.values(items).map((itemCategory) =>
                 itemCategory.map((item) => (
-                    <ItemDetail item={item} key={item.id} />
+                    <ItemDetail item={item} key={item.name} />
                 ))
             )}
         </div>

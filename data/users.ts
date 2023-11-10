@@ -6,6 +6,7 @@ export const users = [
         level: 1,
         gold: 10000,
         experience: 0,
+        inventorySlots: 50,
         skillsLevels: [
             {
                 name: "Mining",
@@ -27,6 +28,7 @@ export const users = [
         level: 2,
         gold: 20,
         experience: 100,
+        inventorySlots: 50,
         skillsLevels: [
             {
                 name: "Mining",

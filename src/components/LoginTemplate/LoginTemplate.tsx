@@ -31,7 +31,11 @@ const LoginTemplate = () => {
         e.preventDefault();
         const foundUser = users.find(user => user.username === username && user.password === password)
         if (foundUser) {
-            dispatch(logIn({ username, isAdmin: foundUser.isAdmin, gold: foundUser.gold, level: foundUser.level, experience: foundUser.experience, skillsLevels: foundUser.skillsLevels, inventory: foundUser.inventory}));
+            dispatch(logIn({
+                username, isAdmin: foundUser.isAdmin, gold: foundUser.gold, level: foundUser.level, experience: foundUser.experience, skillsLevels: foundUser.skillsLevels, inventory: foundUser.inventory,
+                inventorySlots: foundUser.inventorySlots,
+                
+            }));
             router.push('/app/');
             toast.success(`Welcome ${username}`)
         }

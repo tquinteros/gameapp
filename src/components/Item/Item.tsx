@@ -21,7 +21,7 @@ const ItemDetail = ({ item }: { item: ItemProps }) => {
         }
     
         const hasItem = user.inventory.some((inventoryItem) => inventoryItem.name === item.name);
-        if (hasItem) {
+        if (hasItem && (item.type === "tool" || item.type === "armor")) {
             toast.error(`You already have ${item.name} in your inventory!`);
             return;
         }

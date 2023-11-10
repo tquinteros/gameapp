@@ -20,6 +20,7 @@ type AuthState = {
     level: number;
     gold: number;
     experience: number;
+    inventorySlots: number;
     skillsLevels: SkillLevel[];
     inventory: ItemProps[];
 };
@@ -35,6 +36,7 @@ const initialState: InitialState = {
         skillsLevels: [],
         inventory: [],
         gold: 0,
+        inventorySlots: 50,
     },
 };
 
@@ -43,8 +45,8 @@ export const auth = createSlice({
     initialState,
     reducers: {
         logOut: () => initialState,
-        logIn: (state, action: PayloadAction<{ username: string; isAdmin: boolean; level: number; gold: number; experience: number; skillsLevels: SkillLevel[]; inventory: ItemProps[] }>) => {
-            const { username, isAdmin, level, experience, skillsLevels, gold, inventory } = action.payload;
+        logIn: (state, action: PayloadAction<{ username: string; isAdmin: boolean; level: number; gold: number; experience: number; skillsLevels: SkillLevel[]; inventory: ItemProps[]; inventorySlots: number; }>) => {
+            const { username, isAdmin, level, experience, skillsLevels, gold, inventory, inventorySlots } = action.payload;
             return {
                 value: {
                     isAuthenticated: true,
@@ -56,6 +58,7 @@ export const auth = createSlice({
                     experience,
                     skillsLevels,
                     inventory,
+                    inventorySlots
                 },
             };
         },
@@ -111,6 +114,9 @@ export const auth = createSlice({
                 state.value.inventory.splice(itemIndex, 1);
             }
         },
+        addInventorySlots: (state, action: PayloadAction<number>) => {
+            state.value.inventorySlots += action.payload;
+        },
     },
 });
 
@@ -125,5 +131,6 @@ export const { logIn,
     removeGold,
     addItemToInventory,
     removeItemFromInventory,
+    addInventorySlots,
 } = auth.actions;
 export default auth.reducer;
