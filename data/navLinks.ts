@@ -1,17 +1,5 @@
 export const navLinks = [
     {
-        name: 'Home',
-        href: '/app',
-    },
-    {
-        name: 'Works',
-        href: '/app/works',
-    },
-    {
-        name: 'Shop',
-        href: '/app/shop',
-    },
-    {
         name: 'Quests',
         href: '/app',
     },

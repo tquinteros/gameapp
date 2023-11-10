@@ -2,12 +2,15 @@
 
 import { navLinks } from '@/data/navLinks';
 import Link from 'next/link';
-import React from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useAppSelector } from '@/redux/store'
 import { logOut, addExperience, addLevel, addGold } from '@/redux/features/auth';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { levels } from '@/data/levels';
+import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
+import { motion } from 'framer-motion';
+import { RefObject } from "react";
 
 interface ProgressBarProps {
     progress: number;
@@ -28,6 +31,8 @@ export const Header = () => {
     const router = useRouter();
     const username = useAppSelector((state) => state.authReducer.value);
     const dispatch = useDispatch();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const navRef: RefObject<HTMLDivElement> = useRef(null);
 
     const handleLogOut = () => {
         dispatch(logOut());
@@ -52,11 +57,41 @@ export const Header = () => {
             ? 100
             : (username.experience / currentLevelThreshold) * 100;
 
+    const handleToggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+
+    const closeMenu = () => {
+        setIsMenuOpen(false);
+    };
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (navRef.current && !navRef.current.contains(event.target as Node)) {
+                closeMenu();
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [navRef]);
+
     return (
         <header className="py-4 px-4">
-            <nav className="grid grid-cols-12">
-                <h3 className="text-4xl col-span-2">LOGO</h3>
-                <ul className="flex items-center justify-center col-span-7 gap-8">
+            <nav className="hidden lg:grid grid-cols-12">
+                <h3 className="text-4xl col-span-1">DESKTOP</h3>
+                <div className="flex justify-center col-span-8 gap-6 items-center">
+                    <h3 className=''>Level {username.level}</h3>
+                    <div className='relative w-[50%]'>
+                        <ProgressBar progress={progress} />
+                        <span className='absolute top-0 left-1/2 -translate-x-1/2'>{username.experience}/{experienceNextLevel}</span>
+                    </div>
+                    <span className="cursor-pointer">🟡 {username.gold}</span>
+                </div>
+                <ul className="flex items-center justify-end col-span-3 gap-8">
                     {navLinks.map((navLink) => (
                         <li key={navLink.name}>
                             <Link href={navLink.href}>{navLink.name}</Link>
@@ -69,14 +104,54 @@ export const Header = () => {
                         <button onClick={handleAddExperience}>ADD EXP</button>
                     </li>
                 </ul>
-                <div className="flex col-span-3 gap-6 items-center">
-                    <h3 className=''>Level {username.level}</h3>
-                    <div className='relative w-[60%]'>
-                        <ProgressBar progress={progress} />
-                        <span className='absolute top-0 left-1/2 -translate-x-1/2'>{username.experience}/{experienceNextLevel}</span>
-                    </div>
-                    <span className="cursor-pointer">🟡 {username.gold}</span>
-                </div>
+            </nav>
+
+
+            {/* MOBILE */}
+            <nav ref={navRef} className="flex justify-between items-center relative lg:hidden">
+                <h3 className="text-4xl">AAAA</h3>
+                <span className="cursor-pointer mt-2">🟡 {username.gold}</span>
+
+                {
+                    isMenuOpen ? (
+                        <div className='flex justify-end items-center'>
+                            <AiOutlineClose onClick={handleToggleMenu} className="cursor-pointer" size={32} />
+                        </div>
+                    ) : (
+                        <div className='flex justify-end items-center'>
+                            <AiOutlineMenu onClick={handleToggleMenu} className="cursor-pointer" size={32} />
+                        </div>
+                    )
+                }
+                {
+                    isMenuOpen && (
+                        <motion.div
+                            initial={{ opacity: 0, x: 200 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.5 }}
+                            className="flex flex-col h-fit p-4 rounded-md w-64 bg-black z-[9999] absolute top-16 -right-2 gap-8">
+                            {navLinks.map((navLink) => (
+                                <span key={navLink.name}>
+                                    <Link href={navLink.href}>{navLink.name}</Link>
+                                </span>
+                            ))}
+                            <span className="cursor-pointer">
+                                <button onClick={handleLogOut}>Log Out</button>
+                            </span>
+                            <span className="cursor-pointer">
+                                <button onClick={handleAddExperience}>ADD EXP</button>
+                            </span>
+                            <div className="flex flex-col gap-1">
+                                <h3 className='text-center'>Level {username.level}</h3>
+                                <div className='relative w-full'>
+                                    <ProgressBar progress={progress} />
+                                    <span className='absolute top-0 left-1/2 -translate-x-1/2'>{username.experience}/{experienceNextLevel}</span>
+                                </div>
+                            </div>
+                        </motion.div>
+                    )
+                }
+
             </nav>
         </header>
     );
