@@ -6,6 +6,7 @@ export type ItemProps = {
   description?: string;
   image: string;
   level?: number;
+  tier?: number;
   quantity?: number;
   category: string;
 };
@@ -18,6 +19,7 @@ export type InventoryItem = {
   description?: string;
   image: string;
   level?: number;
+  tier?: number;
   quantity?: number;
   category: string;
 };
@@ -31,5 +33,6 @@ export type MineralProps = {
   type: string;
   levelRequired: number;
   requiredPickaxe: string;
+  requiredTier: number;
   percentageGold: number;
 };

@@ -117,6 +117,7 @@ export const auth = createSlice({
                 level: action.payload.level,
                 quantity: 1,
                 category: action.payload.category,
+                tier: action.payload.tier,
             };
 
             const existingItem = state.value.inventory.find(item => item.id === newItem.id);

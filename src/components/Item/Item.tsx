@@ -48,6 +48,7 @@ const ItemDetail = ({ item }: { item: ItemProps }) => {
             <Tooltip id={`tooltip-${item.id}`}>
                 <div className="flex flex-col">
                     <span>{item.name}</span>
+                    <span>{item.tier}</span>
                     <span>Price: {item.price}</span>
                     <span>Type: {item.type}</span>
                     <span>Description: {item.description}</span>

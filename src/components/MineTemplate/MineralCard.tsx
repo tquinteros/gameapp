@@ -43,8 +43,8 @@ const MineralCard = ({ mineral }: { mineral: MineralProps }) => {
             return;
         }
 
-        if (!user.inventory.some((item) => item.type === mineral.requiredPickaxe)) {
-            toast.error(`You need a ${mineral.requiredPickaxe} pickaxe to mine this mineral!`, {
+        if (!user.inventory.some((item) => item.category === "pickaxe" && item.tier && item.tier >= mineral.requiredTier)) {
+            toast.error(`You need a tier ${mineral.requiredTier} pickaxe to mine this mineral!`, {
                 icon: "⛏",
                 autoClose: 2000,
             });
