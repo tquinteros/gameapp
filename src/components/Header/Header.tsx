@@ -83,7 +83,7 @@ export const Header = () => {
         <header className="py-4 px-4">
             <nav className="hidden lg:grid grid-cols-12">
                 <h3 className="text-4xl col-span-1">DESKTOP</h3>
-                <div className="flex justify-center col-span-8 gap-6 items-center">
+                <div className="flex justify-center 2xl:col-span-9 col-span-8 gap-6 items-center">
                     <h3 className=''>Level {username.level}</h3>
                     <div className='relative w-[50%]'>
                         <ProgressBar progress={progress} />
@@ -91,7 +91,7 @@ export const Header = () => {
                     </div>
                     <span className="cursor-pointer">🟡 {username.gold}</span>
                 </div>
-                <ul className="flex items-center justify-end col-span-3 gap-8">
+                <ul className="flex items-center justify-end 2xl:col-span-2 col-span-3 gap-8">
                     {navLinks.map((navLink) => (
                         <li key={navLink.name}>
                             <Link href={navLink.href}>{navLink.name}</Link>

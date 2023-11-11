@@ -45,10 +45,12 @@ const ItemDetail = ({ item }: { item: ItemProps }) => {
         className="flex flex-col cursor-pointer" data-tooltip-id={`tooltip-${item.id}`}>
             <Image src={item.image} alt={item.name} width={50} height={50} />
             <span>🟡{item.price}</span>
-            <Tooltip id={`tooltip-${item.id}`}>
+            <Tooltip className="z-40" id={`tooltip-${item.id}`}>
                 <div className="flex flex-col">
                     <span>{item.name}</span>
-                    <span>Tier {item.tier}</span>
+                    {
+                        item.tier && (<span>Tier {item.tier}</span>)
+                    }
                     <span>Price: {item.price}</span>
                     <span>Type: {item.type}</span>
                     <span>Description: {item.description}</span>

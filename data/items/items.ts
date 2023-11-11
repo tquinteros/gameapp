@@ -43,7 +43,7 @@ export const items = {
             level: 1,
             tier: 1,
             price: 10,
-            description: "A wooden pickaxe.",
+            description: "A wooden axe.",
             image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/5/56/Wooden_Axe_JE2_BE2.png/revision/latest?cb=20200217234355",
         },
         {
@@ -54,7 +54,7 @@ export const items = {
             level: 2,
             tier: 2,
             price: 20,
-            description: "A stone pickaxe.",
+            description: "A stone axe.",
             image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/0/02/Stone_Axe_JE2_BE2.png/revision/latest?cb=20200217234417",
         },
         {
@@ -65,7 +65,7 @@ export const items = {
             level: 2,
             tier: 3,
             price: 50,
-            description: "A gold pickaxe.",
+            description: "A gold axe.",
             image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/e/e2/Golden_Axe_JE3_BE2.png/revision/latest?cb=20200217234513",
         },
     ],

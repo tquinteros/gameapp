@@ -25,7 +25,7 @@ const InventoryItem = ({ item }: { item: ItemProps }) => {
                 onClick={() => handleRemoveItem(item)}
                 className="flex flex-col border-2 rounded-md border-gray-300 w-16 h-16 items-center justify-center cursor-pointer" data-tooltip-id={`tooltip-${item.id}`}>
                 <Image src={item.image} alt={item.name} width={50} height={50} />
-                <Tooltip id={`tooltip-${item.id}`}>
+                <Tooltip className="z-40" id={`tooltip-${item.id}`}>
                     <div className="flex flex-col">
                         <span>{item.name}</span>
                         {item.tier && <span>Tier {item.tier}</span> }

@@ -1,0 +1,6 @@
+11 Nov 2023:
+-Buy slots on inventory (max 100, cost +20% each time)
+-New inventory items design
+-Remove duplicate items and set quantity to items on inventory
+-Added tier system to items for working
+-Added woodcutting system
