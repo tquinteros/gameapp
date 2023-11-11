@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/redux/store";
 import { toast } from "react-toastify";
 import { ItemProps } from "@/types/types";
+import { items } from "@/data/items/items";
 
 const InventoryItem = ({ item }: { item: ItemProps }) => {
 
@@ -19,16 +20,35 @@ const InventoryItem = ({ item }: { item: ItemProps }) => {
         toast.success(`You sold ${item.name} for ${item.price * 0.8} gold!`)
     }
 
+    const handleOpenChest = () => {
+        const chestTier = item.tier;
+    
+        if (chestTier !== undefined) {
+            const chestItems = items.filter((item) => item.category !== "chest" && item.tier !== undefined && item.tier <= chestTier);
+    
+            if (chestItems.length > 0) {
+                const randomItem = chestItems[Math.floor(Math.random() * chestItems.length)];
+                dispatch(addItemToInventory({ item: randomItem, quantity: 1 }));
+                dispatch(removeItemFromInventory(item));
+                toast.success(`You opened a chest and found ${randomItem.name}!`);
+            } else {
+                toast.error(`Error: No valid items found for the chest's tier.`);
+            }
+        } else {
+            toast.error(`Error: Chest tier is undefined.`);
+        }
+    }
+
     return (
         <div className="flex flex-col items-center">
             <div
-                onClick={() => handleRemoveItem(item)}
+                onClick={() => (item.category === "chest" ? handleOpenChest() : handleRemoveItem(item))}
                 className="flex flex-col border-2 rounded-md border-gray-300 w-16 h-16 items-center justify-center cursor-pointer" data-tooltip-id={`tooltip-${item.id}`}>
                 <Image src={item.image} alt={item.name} width={50} height={50} />
                 <Tooltip className="z-40" id={`tooltip-${item.id}`}>
                     <div className="flex flex-col">
                         <span>{item.name}</span>
-                        {item.tier && <span>Tier {item.tier}</span> }
+                        {item.tier && <span>Tier {item.tier}</span>}
                         <span>Description: {item.description}</span>
                     </div>
                 </Tooltip>

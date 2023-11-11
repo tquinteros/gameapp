@@ -1,4 +1,5 @@
-export const items = [
+export const items = {
+    pickaxes: [
         {
             id: crypto.randomUUID(),
             name: "Wooden Pickaxe",
@@ -32,6 +33,8 @@ export const items = [
             description: "A stone pickaxe.",
             image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/a/a6/Golden_Pickaxe_JE4_BE3.png/revision/latest?cb=20200226194041",
         },
+    ],
+    axes: [
         {
             id: crypto.randomUUID(),
             name: "Wooden Axe",
@@ -65,6 +68,10 @@ export const items = [
             description: "A gold axe.",
             image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/e/e2/Golden_Axe_JE3_BE2.png/revision/latest?cb=20200217234513",
         },
+    ],
+    swords: [
+    ],
+    materials: [
         {
             id: crypto.randomUUID(),
             name: "Canyon Ingot",
@@ -74,6 +81,8 @@ export const items = [
             description: "A canyon ingot.",
             image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/f/fc/Iron_Ingot_JE3_BE2.png/revision/latest?cb=20230613175240",
         },
+    ],
+    chests: [
         {
             id: crypto.randomUUID(),
             name: "Wooden Chest",
@@ -81,7 +90,7 @@ export const items = [
             category: "chest",
             price: 10,
             tier: 1,
-            description: "Get a random tier 1 item",
+            description: "A wooden chest.",
             image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/4/41/Chest.gif/revision/latest?cb=20191219163201",
         },
         {
@@ -91,7 +100,7 @@ export const items = [
             category: "chest",
             price: 20,
             tier: 2,
-            description: "Get a random tier 2 item",
+            description: "A stone chest.",
             image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/4/41/Chest.gif/revision/latest?cb=20191219163201",
         },
         {
@@ -101,7 +110,8 @@ export const items = [
             category: "chest",
             price: 50,
             tier: 3,
-            description: "Get a random tier 3 item",
+            description: "A gold chest.",
             image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/4/41/Chest.gif/revision/latest?cb=20191219163201",
         },
-]
+    ],
+};

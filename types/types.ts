@@ -1,5 +1,5 @@
 export type ItemProps = {
-  id: number;
+  id: number | string;
   name: string;
   price: number;
   type: string;
@@ -8,20 +8,11 @@ export type ItemProps = {
   level?: number;
   tier?: number;
   quantity?: number;
-  category: string;
+  category?: string;
 };
 
-export type InventoryItem = {
-  id: number;
-  name: string;
-  price: number;
-  type: string;
-  description?: string;
-  image: string;
-  level?: number;
-  tier?: number;
+export type InventoryItem = ItemProps & {
   quantity?: number;
-  category: string;
 };
 
 export type MineralProps = {
@@ -41,4 +32,18 @@ export interface ModalProps {
   isOpen: boolean;
   children: React.ReactNode;
   onClose: () => void;
+  ref?: React.RefObject<HTMLDivElement>;
+}
+
+export interface InputProps {
+  type: string;
+  name: string;
+  placeholder: string;
+  min?: number;
+  max?: number;
+  label: string;
+  value: string | number;
+  required?: boolean;
+  className?: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }

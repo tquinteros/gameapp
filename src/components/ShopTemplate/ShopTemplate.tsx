@@ -12,11 +12,16 @@ const ShopTemplate = () => {
 
     return (
         <div className="flex flex-wrap gap-8">
-            {Object.values(items).map((itemCategory) =>
+            {/* {Object.values(items).map((itemCategory) =>
                 itemCategory.map((item) => (
                     <ItemDetail item={item} key={item.name} />
                 ))
-            )}
+            )} */}
+            {
+                items.map((item) => (
+                    <ItemDetail item={item} key={item.name} />
+                ))
+            }
         </div>
     );
 };

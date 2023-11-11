@@ -8,6 +8,7 @@ import { logIn, logOut, toggleAdmin } from "@/redux/features/auth"
 import Link from "next/link";
 // import axios from "axios";
 import { users } from "@/data/users";
+import Input from "../Input/Input";
 
 const LoginTemplate = () => {
     const router = useRouter();
@@ -34,7 +35,7 @@ const LoginTemplate = () => {
             dispatch(logIn({
                 username, isAdmin: foundUser.isAdmin, gold: foundUser.gold, level: foundUser.level, experience: foundUser.experience, skillsLevels: foundUser.skillsLevels, inventory: foundUser.inventory,
                 inventorySlots: foundUser.inventorySlots,
-                
+
             }));
             router.push('/app/');
             toast.success(`Welcome ${username}`)
@@ -57,16 +58,26 @@ const LoginTemplate = () => {
                 <div className="flex flex-col gap-4">
 
                     <label className="flex gap-4 flex-col">
-                        <span>Username:</span>
-                        <input
+                        <Input
+                            label="Username"
+                            type="text"
+                            name="username"
+                            value={username}
+                            required
                             onChange={(e) => setUsername(e.target.value)}
-                            className="p-2 rounded-md border text-black border-black px-3" type="text" required />
+                            placeholder="Username"
+                        />
                     </label>
                     <label className="flex gap-4 flex-col">
-                        <span>Password:</span>
-                        <input
+                        <Input
+                            label="Password"
+                            type="password"
+                            name="password"
+                            required
+                            value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="p-2 rounded-md border text-black border-black px-3" required type="password" />
+                            placeholder="Password"
+                        />
                     </label>
                     <button type="submit">Log In</button>
                 </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Tooltip } from 'react-tooltip';
 import Image from "next/image";
 import { addItemToInventory, removeGold, addExperience } from "@/redux/features/auth";
@@ -7,6 +7,7 @@ import { useAppSelector } from "@/redux/store";
 import { toast } from "react-toastify";
 import { ItemProps } from "@/types/types";
 import BuyModal from "../Modals/BuyModal/BuyModal";
+import Input from "../Input/Input";
 
 const ItemDetail = ({ item }: { item: ItemProps }) => {
 
@@ -15,6 +16,8 @@ const ItemDetail = ({ item }: { item: ItemProps }) => {
     const user = useAppSelector((state) => state.authReducer.value);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [quantity, setQuantity] = useState(1);
+    const modalRef = useRef<HTMLDivElement>(null);
+
 
     const handleBuyItem = (item: ItemProps, quantity: number) => {
         if (userBalance < item.price * quantity) {
@@ -39,10 +42,30 @@ const ItemDetail = ({ item }: { item: ItemProps }) => {
         setIsModalOpen(false);
     }
 
+    const handleOutsideClick = (e: React.MouseEvent) => {
+        if (e.target === e.currentTarget) {
+            handleCloseModal();
+        }
+    };
+
+    useEffect(() => {
+        const handleOutsideClick = (e: MouseEvent) => {
+            if (modalRef.current && modalRef.current instanceof HTMLElement && !modalRef.current.contains(e.target as Node)) {
+                handleCloseModal();
+            }
+        };
+    
+        document.addEventListener("mousedown", handleOutsideClick);
+    
+        return () => {
+            document.removeEventListener("mousedown", handleOutsideClick);
+        };
+    }, [modalRef]);
+
     return (
         <div
             // onClick={() => handleBuyItem(item, 1)}
-            className="flex flex-col" data-tooltip-place="bottom" data-tooltip-id={`tooltip-${item.id}`}>
+            className="flex flex-col gap-1" data-tooltip-place="bottom" data-tooltip-id={`tooltip-${item.id}`}>
             <Image
                 onClick={() => setIsModalOpen(true)}
                 src={item.image} alt={item.name} className="cursor-pointer" width={50} height={50} />
@@ -60,44 +83,66 @@ const ItemDetail = ({ item }: { item: ItemProps }) => {
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
             >
-                <h3 className="text-2xl text-center">You&apos;re buying</h3>
-                <div className="flex gap-4 flex-col">
-                    <div className="flex">
-                        <Image
-                            src={item.image} alt={item.name} className="cursor-pointer" width={75} height={75} />
-                        <div className="flex flex-col">
-                            <span>{item.name}</span>
-                            {
-                                item.tier && (
-                                    <span>Tier: {item.tier}</span>
-                                )
-                            }
-                            <span>🟡{item.price} (each)</span>
+                <div
+                ref={modalRef}
+                className="px-12 py-6"
+                >
+                    <h3 className="text-2xl mb-8 text-center">You&apos;re buying</h3>
+                    <div className="flex pb-4 gap-4 flex-col">
+                        <div className="flex gap-3 items-center">
+                            <Image
+                                src={item.image} alt={item.name} className="cursor-pointer" width={75} height={75} />
+                            <div className="flex flex-col">
+                                <span>{item.name}</span>
+                                {
+                                    item.tier && (
+                                        <span>Tier: {item.tier}</span>
+                                    )
+                                }
+                                <span>🟡{item.price} (each)</span>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <label>
+                        <div>
+                            {/* <label>
                             Quantity:
                             <input className="w-full bg-black/25 border px-2 py-0.5 rounded-md" type="number" min="1" max="99" value={quantity} onChange={(e) => setQuantity(parseInt(e.target.value))} />
-                        </label>
-                    </div>
-                    <div>
-                        Total: {item.price * quantity}
-                    </div>
-                    <div className="flex gap-2 w-full">
-                        <button
-                            onClick={handleCloseModal}
-                            className="px-4 w-full py-0.5 rounded-md border"
-                        >Close
-                        </button>
-                        <button
-                            onClick={() => handleBuyItem(item, quantity)}
-                            className="px-4 w-full py-0.5 rounded-md border"
-                        >Buy Item
-                        </button>
+                        </label> */}
+                            <Input
+                                label="Quantity"
+                                type="text"
+                                name="quantity"
+                                value={quantity}
+                                onChange={(e) => {
+                                    const inputValue = e.target.value;
+                                    setQuantity(inputValue === '' || isNaN(parseInt(inputValue)) ? 1 : parseInt(inputValue));
+                                }}
+                                placeholder="Quantity"
+                            />
+                        </div>
+                        <div>
+                            Total: 🟡{item.price * quantity}
+                        </div>
+                        <div className="flex gap-2 w-full">
+                            <button
+                                onClick={handleCloseModal}
+                                className="px-4 w-full py-0.5 rounded-md border"
+                            >Close
+                            </button>
+                            <button
+                                onClick={() => handleBuyItem(item, quantity)}
+                                className="px-4 w-full py-0.5 rounded-md border"
+                            >Buy Item
+                            </button>
+                        </div>
                     </div>
                 </div>
             </BuyModal>
+            {isModalOpen && (
+                <div
+                    onClick={handleOutsideClick}
+                    className="fixed inset-0 z-[45] bg-black/50 cursor-pointer"
+                ></div>
+            )}
         </div>
     )
 }
