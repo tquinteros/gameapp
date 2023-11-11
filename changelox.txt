@@ -4,3 +4,8 @@
 -Remove duplicate items and set quantity to items on inventory
 -Added tier system to items for working
 -Added woodcutting system
+-Responsive header
+
+TODO:
+-Redesign tooltip on mobile
+-Design Modal on buy

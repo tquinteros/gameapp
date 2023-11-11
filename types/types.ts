@@ -36,3 +36,9 @@ export type MineralProps = {
   requiredTier: number;
   percentageGold: number;
 };
+
+export interface ModalProps {
+  isOpen: boolean;
+  children: React.ReactNode;
+  onClose: () => void;
+}

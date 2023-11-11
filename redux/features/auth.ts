@@ -106,22 +106,24 @@ export const auth = createSlice({
         removeGold: (state, action: PayloadAction<number>) => {
             state.value.gold -= action.payload;
         },
-        addItemToInventory: (state, action: PayloadAction<ItemProps>) => {
+        addItemToInventory: (state, action: PayloadAction<{ item: ItemProps; quantity: number }>) => {
+            const { item, quantity } = action.payload;
+        
             const newItem: ItemProps = {
-                id: action.payload.id,
-                name: action.payload.name,
-                price: action.payload.price,
-                type: action.payload.type,
-                description: action.payload.description,
-                image: action.payload.image,
-                level: action.payload.level,
-                quantity: 1,
-                category: action.payload.category,
-                tier: action.payload.tier,
+                id: item.id,
+                name: item.name,
+                price: item.price,
+                type: item.type,
+                description: item.description,
+                image: item.image,
+                level: item.level,
+                quantity: quantity,
+                category: item.category,
+                tier: item.tier,
             };
-
-            const existingItem = state.value.inventory.find(item => item.id === newItem.id);
-
+        
+            const existingItem = state.value.inventory.find((existing) => existing.id === newItem.id);
+        
             if (existingItem) {
                 if (existingItem.quantity !== undefined) {
                     existingItem.quantity += newItem.quantity || 0;
