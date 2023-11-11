@@ -30,7 +30,7 @@ const MineralCard = ({ mineral }: { mineral: MineralProps }) => {
     }
 
     const handleAddMiningExperience = (experience: number, delay: number) => {
-        const givenItem = items.find(item => item.type === mineral.type);
+        const givenItem = items.find(item => item.type === mineral.type && item.category === "material");
         const miningSkill = findUserSkill("Mining");
         const currentLevelThreshold = levels[user.level].experience;
         if (!miningSkill) {

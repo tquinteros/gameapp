@@ -1,6 +1,6 @@
 export const mines = [
     {
-        name: "Canyon Rock",
+        name: "Canyon Ore",
         materialImg: "/mines/canyon_rock.png",
         itemImg: "/mines/canyon_item.png",
         levelRequired: 1,
@@ -12,19 +12,19 @@ export const mines = [
         percentageGold: 0.1,
     },
     {
-        name: "Canyon Rock2",
+        name: "Iron Ore",
         materialImg: "/mines/canyon_rock.png",
         itemImg: "/mines/canyon_item.png",
         levelRequired: 2,
         experience: 10,
-        type: "stone",
+        type: "iron",
         requiredPickaxe: "stone",
         requiredTier: 2,
         delay: 1000,
         percentageGold: 0.3,
     },
     {
-        name: "Canyon Rock3",
+        name: "Iron Ore",
         materialImg: "/mines/canyon_rock.png",
         itemImg: "/mines/canyon_item.png",
         levelRequired: 3,
