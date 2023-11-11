@@ -1,7 +1,7 @@
 "use client"
 import Image from "next/image";
 import React, { useState } from "react";
-import { addExperience, addLevel, addExperienceSkill, addLevelSkill, addGold } from "@/redux/features/auth";
+import { addExperience, addLevel, addExperienceSkill, addLevelSkill, addGold, addItemToInventory } from "@/redux/features/auth";
 import { miningLevels } from "@/data/levels";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/redux/store";
@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { levels } from '@/data/levels';
 import { toggleFlag } from "@/redux/features/flag";
 import { MineralProps } from "@/types/types";
+import { items } from "@/data/items/items";
 
 const MineralCard = ({ mineral }: { mineral: MineralProps }) => {
 
@@ -29,6 +30,7 @@ const MineralCard = ({ mineral }: { mineral: MineralProps }) => {
     }
 
     const handleAddMiningExperience = (experience: number, delay: number) => {
+        const givenItem = items.find(item => item.type === mineral.type);
         const miningSkill = findUserSkill("Mining");
         const currentLevelThreshold = levels[user.level].experience;
         if (!miningSkill) {
@@ -72,8 +74,19 @@ const MineralCard = ({ mineral }: { mineral: MineralProps }) => {
                         dispatch(addExperience(1));
                     }
                     setProgress(0);
+                    if (!givenItem) {
+                        console.error("No item found for the given type.");
+                        return;
+                    }
+                    dispatch(addItemToInventory({ item: givenItem, quantity: 1 }));
+                    toast.success(`+1 ${givenItem.name}`, {
+                        position: "bottom-center",
+                        icon: () => <Image src={givenItem.image} width={25} height={25} alt={givenItem.name} />
+                    });
                 }
             }, delay / 100);
+
+
         } else {
             let currentProgress = 0;
             const interval = setInterval(() => {
@@ -97,8 +110,18 @@ const MineralCard = ({ mineral }: { mineral: MineralProps }) => {
                         dispatch(addGold(1));
                     }
                     setProgress(0);
+                    if (!givenItem) {
+                        console.error("No item found for the given type.");
+                        return;
+                    }
+                    dispatch(addItemToInventory({ item: givenItem, quantity: 1 }));
+                    toast.success(`+1 ${givenItem.name}`, {
+                        position: "bottom-center",
+                        icon: () => <Image src={givenItem.image} width={25} height={25} alt={givenItem.name} />
+                    });
                 }
             }, delay / 100);
+
         }
     };
 
