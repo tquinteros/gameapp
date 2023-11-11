@@ -22,6 +22,13 @@ const InventoryItem = ({ item }: { item: ItemProps }) => {
 
     const handleOpenChest = () => {
         const chestTier = item.tier;
+
+        const uniqueItemsInInventory = new Set(user.inventory.map((inventoryItem) => inventoryItem.id));
+
+        if (uniqueItemsInInventory.size >= user.inventorySlots) {
+            toast.error(`You can't have more than ${user.inventorySlots} unique items`);
+            return;
+        }
     
         if (chestTier !== undefined) {
             const chestItems = items.filter((item) => item.category !== "chest" && item.tier !== undefined && item.tier <= chestTier);

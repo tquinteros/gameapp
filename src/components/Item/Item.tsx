@@ -85,9 +85,9 @@ const ItemDetail = ({ item }: { item: ItemProps }) => {
             >
                 <div
                 ref={modalRef}
-                className="px-12 py-6"
+                className="px-6 py-4"
                 >
-                    <h3 className="text-2xl mb-8 text-center">You&apos;re buying</h3>
+                    <h3 className="text-2xl mb-4 text-center">You&apos;re buying</h3>
                     <div className="flex pb-4 gap-4 flex-col">
                         <div className="flex gap-3 items-center">
                             <Image
@@ -103,10 +103,6 @@ const ItemDetail = ({ item }: { item: ItemProps }) => {
                             </div>
                         </div>
                         <div>
-                            {/* <label>
-                            Quantity:
-                            <input className="w-full bg-black/25 border px-2 py-0.5 rounded-md" type="number" min="1" max="99" value={quantity} onChange={(e) => setQuantity(parseInt(e.target.value))} />
-                        </label> */}
                             <Input
                                 label="Quantity"
                                 type="text"

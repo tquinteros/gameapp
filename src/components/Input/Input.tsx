@@ -3,7 +3,7 @@ import { InputProps } from "@/types/types";
 
 const Input = ({ label, type, name, value, onChange, placeholder, min, max, className, required }: InputProps) => {
     return (
-            <label className="text-sm flex flex-col">{label}
+            <label className="text-sm gap-1 flex flex-col">{label}
                 <input
                     className={`border rounded-md bg-transparent px-2 py-1.5 ${className}`}
                     type={type}
