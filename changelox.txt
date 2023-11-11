@@ -5,7 +5,10 @@
 -Added tier system to items for working
 -Added woodcutting system
 -Responsive header
+-Design Modal on buy
+-Chests system
+-Fixed inventory bug with Chests
+-Restructured items
 
 TODO:
 -Redesign tooltip on mobile
--Design Modal on buy
