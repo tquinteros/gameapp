@@ -58,7 +58,7 @@ const CraftingItem = ({ item }: { item: ItemProps }) => {
     };
 
     return (
-        <div className="flex items-center justify-between border rounded-sm px-2 py-1 gap-1">
+        <div className="flex lg:col-span-6 col-span-12 items-center justify-between border rounded-sm px-2 py-1 gap-1">
             <Image data-tooltip-place="top" data-tooltip-id={`tooltip-${item.id}`} src={item.image} alt={item.name} className="" width={50} height={50} />
             <Tooltip className="z-40" id={`tooltip-${item.id}`}>
                 <div className="flex flex-col">
@@ -67,13 +67,11 @@ const CraftingItem = ({ item }: { item: ItemProps }) => {
             </Tooltip>
             <div className="flex gap-4">
                 {item.recipe &&
-                    item.recipe.map((recipeItem, index) => {
-                        // Buscar el item correspondiente en la lista completa de items
+                    item.recipe.map((recipeItem) => {
                         const matchingItem = items.find((item) => item.id === recipeItem.id);
-
                         if (matchingItem) {
                             return (
-                                <div key={matchingItem.id} className="flex flex-col items-center gap-1">
+                                <div key={matchingItem.id} className="flex items-center gap-1">
                                     <Image
                                         data-tooltip-place="top"
                                         data-tooltip-id={`${recipeItem.id}`}
@@ -82,7 +80,7 @@ const CraftingItem = ({ item }: { item: ItemProps }) => {
                                         width={30}
                                         height={30}
                                     />
-                                    <span>{recipeItem.quantity}</span>
+                                    <span>({recipeItem.quantity})</span>
                                     <Tooltip className="z-40" id={`${recipeItem.id}`}>
                                         <div className="flex flex-col">
                                             <span>{matchingItem.name}</span>

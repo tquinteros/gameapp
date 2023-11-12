@@ -16,7 +16,7 @@ interface ProgressBarProps {
     progress: number;
 }
 
-const ProgressBar = ({ progress }: ProgressBarProps) => {
+export const ProgressBar = ({ progress }: ProgressBarProps) => {
     return (
         <div className="w-full h-6 bg-gray-700 rounded-md">
             <div
@@ -89,7 +89,7 @@ export const Header = () => {
                         <ProgressBar progress={progress} />
                         <span className='absolute top-0 left-1/2 -translate-x-1/2'>{username.experience}/{experienceNextLevel}</span>
                     </div>
-                    <span className="cursor-pointer">🟡 {username.gold}</span>
+                    <Link href="/app/shop" className="">🟡 {username.gold}</Link>
                 </div>
                 <ul className="flex items-center justify-end 2xl:col-span-2 col-span-3 gap-8">
                     {navLinks.map((navLink) => (
@@ -110,8 +110,7 @@ export const Header = () => {
             {/* MOBILE */}
             <nav ref={navRef} className="flex justify-between items-center relative lg:hidden">
                 <h3 className="text-4xl">AAAA</h3>
-                <span className="cursor-pointer mt-2">🟡 {username.gold}</span>
-
+                <Link href="/app/shop" className="cursor-pointer mt-2">🟡 {username.gold}</Link>
                 {
                     isMenuOpen ? (
                         <div className='flex justify-end items-center'>

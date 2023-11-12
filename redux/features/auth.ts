@@ -20,6 +20,8 @@ type AuthState = {
     isAdmin: boolean;
     level: number;
     gold: number;
+    hp: number;
+    maxHp: number;
     experience: number;
     inventorySlots: number;
     skillsLevels: SkillLevel[];
@@ -33,6 +35,8 @@ const initialState: InitialState = {
         id: "",
         isAdmin: false,
         level: 0,
+        hp: 100,
+        maxHp: 100,
         experience: 0,
         skillsLevels: [],
         inventory: [],
@@ -46,8 +50,8 @@ export const auth = createSlice({
     initialState,
     reducers: {
         logOut: () => initialState,
-        logIn: (state, action: PayloadAction<{ username: string; isAdmin: boolean; level: number; gold: number; experience: number; skillsLevels: SkillLevel[]; inventory: InventoryItem[]; inventorySlots: number; }>) => {
-            const { username, isAdmin, level, experience, skillsLevels, gold, inventory, inventorySlots } = action.payload;
+        logIn: (state, action: PayloadAction<{ username: string; isAdmin: boolean; level: number; gold: number; experience: number; skillsLevels: SkillLevel[]; inventory: InventoryItem[]; inventorySlots: number; hp: number; maxHp: number; }>) => {
+            const { username, isAdmin, level, experience, skillsLevels, gold, inventory, inventorySlots, hp, maxHp } = action.payload;
             return {
                 value: {
                     isAuthenticated: true,
@@ -55,7 +59,9 @@ export const auth = createSlice({
                     id: crypto.randomUUID(),
                     isAdmin,
                     gold,
+                    hp,
                     level,
+                    maxHp,
                     experience,
                     skillsLevels,
                     inventory,
@@ -118,6 +124,7 @@ export const auth = createSlice({
                 image: item.image,
                 level: item.level,
                 quantity: quantity,
+                regenerate: item.regenerate,
                 category: item.category,
                 tier: item.tier,
             };
@@ -144,10 +151,8 @@ export const auth = createSlice({
                     const currentItem = state.value.inventory[itemIndex];
         
                     if (currentItem.quantity !== undefined) {
-                        // Reducir la cantidad según la cantidad especificada en itemToRemove
                         currentItem.quantity -= itemToRemove.quantity || 1;
         
-                        // Eliminar el elemento del inventario si la cantidad es menor o igual a cero
                         if (currentItem.quantity <= 0) {
                             state.value.inventory.splice(itemIndex, 1);
                         }
@@ -159,6 +164,9 @@ export const auth = createSlice({
         },
         addInventorySlots: (state, action: PayloadAction<number>) => {
             state.value.inventorySlots += action.payload;
+        },
+        healthHp: (state, action: PayloadAction<number>) => {
+            state.value.hp += action.payload;
         },
     },
 });
@@ -175,5 +183,6 @@ export const { logIn,
     addItemToInventory,
     removeItemFromInventory,
     addInventorySlots,
+    healthHp,
 } = auth.actions;
 export default auth.reducer;

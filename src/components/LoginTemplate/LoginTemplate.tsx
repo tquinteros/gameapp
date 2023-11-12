@@ -35,7 +35,8 @@ const LoginTemplate = () => {
             dispatch(logIn({
                 username, isAdmin: foundUser.isAdmin, gold: foundUser.gold, level: foundUser.level, experience: foundUser.experience, skillsLevels: foundUser.skillsLevels, inventory: foundUser.inventory,
                 inventorySlots: foundUser.inventorySlots,
-
+                hp: foundUser.hp,
+                maxHp: foundUser.maxHp,
             }));
             router.push('/app/');
             toast.success(`Welcome ${username}`)

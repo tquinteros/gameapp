@@ -6,6 +6,7 @@ export type ItemProps = {
   description?: string;
   image: string;
   level?: number;
+  regenerate?: number;
   tier?: number;
   craftable?: boolean;
   recipe?: { id: number | string; quantity: number; }[];

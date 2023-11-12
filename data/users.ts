@@ -6,6 +6,8 @@ export const users = [
         level: 1,
         gold: 10000,
         experience: 0,
+        hp: 50,
+        maxHp: 100,
         inventorySlots: 50,
         skillsLevels: [
             {
@@ -27,6 +29,8 @@ export const users = [
         isAdmin: false,
         level: 2,
         gold: 20,
+        hp: 100,
+        maxHp: 100,
         experience: 100,
         inventorySlots: 50,
         skillsLevels: [

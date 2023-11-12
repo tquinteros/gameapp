@@ -24,7 +24,7 @@ export const mines = [
         percentageGold: 0.3,
     },
     {
-        name: "Iron Ore",
+        name: "Gold Ore",
         materialImg: "/mines/canyon_rock.png",
         itemImg: "/mines/canyon_item.png",
         levelRequired: 3,

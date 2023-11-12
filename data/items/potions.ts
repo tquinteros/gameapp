@@ -1,0 +1,26 @@
+export const potions = [
+    {
+        id: 11101,
+        name: "Small Health Potion",
+        type: "health",
+        category: "potion",
+        level: 1,
+        tier: 1,
+        regenerate: 10,
+        price: 10,
+        description: "A small health potion.",
+        image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/3/3e/Potion_of_Healing_JE2_BE2.png/revision/latest?cb=20191027040649",
+    },
+    {
+        id: 11102,
+        name: "Medium Health Potion",
+        type: "health",
+        category: "potion",
+        level: 2,
+        tier: 2,
+        regenerate: 20,
+        price: 20,
+        description: "A medium health potion.",
+        image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/3/3e/Potion_of_Healing_JE2_BE2.png/revision/latest?cb=20191027040649",
+    },
+];
