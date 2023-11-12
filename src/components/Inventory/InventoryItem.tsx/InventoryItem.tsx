@@ -23,10 +23,14 @@ const InventoryItem = ({ item }: { item: ItemProps }) => {
 
     const handleOpenChest = () => {
         const chestTier = item.tier;
-
-        const uniqueItemsInInventory = new Set(user.inventory.map((inventoryItem) => inventoryItem.id));
-
-        if (uniqueItemsInInventory.size >= user.inventorySlots) {
+    
+        const uniqueItemsInInventory = user.inventory.filter((inventoryItem, index, self) =>
+            index === self.findIndex((t) => (
+                t.id === inventoryItem.id
+            ))
+        );
+    
+        if (uniqueItemsInInventory.length >= user.inventorySlots) {
             toast.error(`You can't have more than ${user.inventorySlots} unique items`);
             return;
         }
@@ -37,7 +41,8 @@ const InventoryItem = ({ item }: { item: ItemProps }) => {
             if (chestItems.length > 0) {
                 const randomItem = chestItems[Math.floor(Math.random() * chestItems.length)];
                 dispatch(addItemToInventory({ item: randomItem, quantity: 1 }));
-                dispatch(removeItemFromInventory(item));
+                const itemToRemove: ItemProps = { id: item.id, name: item.name, price: item.price, type: item.type, image: item.image, quantity: 1 };
+                dispatch(removeItemFromInventory(itemToRemove));
                 toast.success(`You opened a chest and found ${randomItem.name}!`);
             } else {
                 toast.error(`Error: No valid items found for the chest's tier.`);
@@ -45,7 +50,7 @@ const InventoryItem = ({ item }: { item: ItemProps }) => {
         } else {
             toast.error(`Error: Chest tier is undefined.`);
         }
-    }
+    };
 
     return (
         <div className="flex flex-col items-center">
