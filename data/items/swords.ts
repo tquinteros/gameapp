@@ -37,7 +37,7 @@ export const swords = [
         tier: 2,
         price: 20,
         description: "A stone sword.",
-        image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/b/b1/Stone_Sword_JE2_BE2.png/revision/latest?cb=20200217235849",
+        image: "/items/swords/stonesword.png",
     },
     {
         id: 202,
@@ -63,6 +63,6 @@ export const swords = [
         tier: 3,
         price: 50,
         description: "A gold sword.",
-        image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/d/db/Golden_Sword_JE3_BE2.png/revision/latest?cb=20200217235825",
+        image: "/items/swords/goldsword.png",
     },
 ]
