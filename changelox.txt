@@ -9,6 +9,9 @@
 -Chests system
 -Fixed inventory bug with Chests
 -Restructured items
+-Potion system
+-Crafting System
 
 TODO:
 -Redesign tooltip on mobile
+-Fix HP bar

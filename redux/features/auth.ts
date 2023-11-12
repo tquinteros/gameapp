@@ -78,6 +78,7 @@ export const auth = createSlice({
         addLevel: (state, action: PayloadAction<number>) => {
             state.value.level += action.payload;
             state.value.gold += 50;
+            state.value.maxHp += 10;
             toast.success(`You have earned 50 gold!`, {
                 icon: "💰",
                 position: "bottom-right",

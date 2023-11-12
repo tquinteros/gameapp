@@ -14,14 +14,15 @@ import { RefObject } from "react";
 
 interface ProgressBarProps {
     progress: number;
+    max?: number;
 }
 
-export const ProgressBar = ({ progress }: ProgressBarProps) => {
+export const ProgressBar = ({ progress, max }: ProgressBarProps) => {
     return (
         <div className="w-full h-6 bg-gray-700 rounded-md">
             <div
                 className="h-full bg-green-700/100 rounded-md"
-                style={{ width: `${progress}%` }}
+                style={{ width: `${progress}%`, maxWidth: `${max}%`, }}
             ></div>
         </div>
     );

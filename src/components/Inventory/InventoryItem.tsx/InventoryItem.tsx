@@ -80,7 +80,16 @@ const InventoryItem = ({ item }: { item: ItemProps }) => {
                     <div className="flex flex-col">
                         <span>{item.name}</span>
                         {item.tier && <span>Tier {item.tier}</span>}
-                        <span>Description: {item.description}</span>
+                        {
+                            item.regenerate && item.type === "health" && (
+                                <span>Regenerate {item.regenerate} HP</span>
+                            )
+                        }
+                        {
+                            item.regenerate && item.type === "mana" && (
+                                <span>Regenerate {item.regenerate} MP</span>
+                            )
+                        }
                     </div>
                 </Tooltip>
             </div>

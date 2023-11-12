@@ -9,13 +9,13 @@ const SideLayout = () => {
     const user = useAppSelector((state) => state.authReducer.value);
 
     return (
-        <div className="max-h-screen test rounded-md z-30 p-2 md:p-4 xl:p-8 col-span-12 md:col-span-3 xl:col-span-2 sticky top-0">
-            <div>
+        <div className="max-h-screen test rounded-md z-30 p-2 md:p-4 xl:p-6 col-span-12 md:col-span-3 xl:col-span-2 sticky top-0">
+            <div className="mb-8">
+                <h3 className="text-xl text-center mb-2">HP</h3>
                 <div className="relative">
-                    <ProgressBar progress={user.hp} />
+                    <ProgressBar max={user.maxHp} progress={user.hp} />
                     <div className="absolute top-0 left-1/2 -translate-x-1/2">{user.hp}/{user.maxHp}</div>
                 </div>
-                <h3 className="text-xl">HP</h3>
             </div>
             <div className="flex flex-col gap-4 mb-8">
                 <Link href="/app" className="text-xl hover:opacity-75 duration-300 flex hover:underline items-center gap-2">

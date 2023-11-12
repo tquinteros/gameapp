@@ -1,7 +1,7 @@
 export const potions = [
     {
         id: 11101,
-        name: "Small Health Potion",
+        name: "Small Mana Potion",
         type: "health",
         category: "potion",
         level: 1,
