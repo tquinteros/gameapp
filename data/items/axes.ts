@@ -1,6 +1,6 @@
 export const axes = [
     {
-        id: 4,
+        id: 100,
         name: "Wooden Axe",
         type: "wood",
         category: "axe",
@@ -8,16 +8,8 @@ export const axes = [
         craftable: true,
         recipe: [
             {
-                id: 7,
-                quantity: 2,
-            },
-            {
-                id: 8,
-                quantity: 2,
-            },
-            {
-                id: 9,
-                quantity: 2,
+                id: 10000,
+                quantity: 1,
             },
         ],
         tier: 1,
@@ -26,7 +18,7 @@ export const axes = [
         image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/5/56/Wooden_Axe_JE2_BE2.png/revision/latest?cb=20200217234355",
     },
     {
-        id: 5,
+        id: 101,
         name: "Stone Axe",
         type: "stone",
         category: "axe",
@@ -34,12 +26,12 @@ export const axes = [
         craftable: true,
         recipe: [
             {
-                id: 7,
-                quantity: 2,
+                id: 100,
+                quantity: 1,
             },
             {
-                id: 8,
-                quantity: 2,
+                id: 10000,
+                quantity: 5,
             },
         ],
         tier: 2,
@@ -48,7 +40,7 @@ export const axes = [
         image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/0/02/Stone_Axe_JE2_BE2.png/revision/latest?cb=20200217234417",
     },
     {
-        id: 6,
+        id: 102,
         name: "Gold Axe",
         type: "gold",
         category: "axe",
@@ -56,16 +48,16 @@ export const axes = [
         craftable: true,
         recipe: [
             {
-                id: 7,
-                quantity: 2,
+                id: 101,
+                quantity: 1,
             },
             {
-                id: 8,
-                quantity: 2,
+                id: 10000,
+                quantity: 10,
             },
             {
-                id: 9,
-                quantity: 2,
+                id: 10001,
+                quantity: 5,
             },
         ],
         tier: 3,

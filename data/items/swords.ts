@@ -1,9 +1,9 @@
-export const pickaxes = [
+export const swords = [
     {
-        id: 1,
-        name: "Wooden Pickaxe",
+        id: 200,
+        name: "Canyon Sword",
         type: "wood",
-        category: "pickaxe",
+        category: "sword",
         level: 1,
         craftable: true,
         recipe: [
@@ -14,19 +14,19 @@ export const pickaxes = [
         ],
         tier: 1,
         price: 10,
-        description: "A wooden pickaxe.",
-        image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/d/d2/Wooden_Pickaxe_JE3_BE3.png/revision/latest?cb=20200226194132",
+        description: "A wooden sword.",
+        image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/d/d5/Wooden_Sword_JE2_BE2.png/revision/latest?cb=20200217235747",
     },
     {
-        id: 2,
-        name: "Stone Pickaxe",
+        id: 201,
+        name: "Stone Sword",
         type: "stone",
-        category: "pickaxe",
+        category: "sword",
         level: 2,
         craftable: true,
         recipe: [
             {
-                id: 1,
+                id: 200,
                 quantity: 1,
             },
             {
@@ -36,19 +36,19 @@ export const pickaxes = [
         ],
         tier: 2,
         price: 20,
-        description: "A stone pickaxe.",
-        image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/c/c4/Stone_Pickaxe_JE2_BE2.png/revision/latest?cb=20200217234007",
+        description: "A stone sword.",
+        image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/b/b1/Stone_Sword_JE2_BE2.png/revision/latest?cb=20200217235849",
     },
     {
-        id: 3,
-        name: "Gold Pickaxe",
+        id: 202,
+        name: "Gold Sword",
         type: "gold",
-        category: "pickaxe",
+        category: "sword",
         level: 2,
         craftable: true,
         recipe: [
             {
-                id: 2,
+                id: 201,
                 quantity: 1,
             },
             {
@@ -62,7 +62,7 @@ export const pickaxes = [
         ],
         tier: 3,
         price: 50,
-        description: "A gold pickaxe.",
-        image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/a/a6/Golden_Pickaxe_JE4_BE3.png/revision/latest?cb=20200226194041",
+        description: "A gold sword.",
+        image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/d/db/Golden_Sword_JE3_BE2.png/revision/latest?cb=20200217235825",
     },
 ]

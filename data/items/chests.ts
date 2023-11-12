@@ -1,6 +1,6 @@
 export const chests = [
     {
-        id: 10,
+        id: 1000,
         name: "Wooden Chest",
         type: "wood",
         category: "chest",
@@ -11,7 +11,7 @@ export const chests = [
         image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/4/41/Chest.gif/revision/latest?cb=20191219163201",
     },
     {
-        id: 11,
+        id: 1001,
         name: "Stone Chest",
         type: "stone",
         category: "chest",
@@ -22,7 +22,7 @@ export const chests = [
         image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/4/41/Chest.gif/revision/latest?cb=20191219163201",
     },
     {
-        id: 12,
+        id: 1002,
         name: "Gold Chest",
         type: "gold",
         category: "chest",

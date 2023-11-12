@@ -76,14 +76,14 @@ const CraftingItem = ({ item }: { item: ItemProps }) => {
                                 <div key={matchingItem.id} className="flex flex-col items-center gap-1">
                                     <Image
                                         data-tooltip-place="top"
-                                        data-tooltip-id={`${index}`}
+                                        data-tooltip-id={`${recipeItem.id}`}
                                         src={matchingItem.image}
                                         alt={matchingItem.name}
                                         width={30}
                                         height={30}
                                     />
                                     <span>{recipeItem.quantity}</span>
-                                    <Tooltip className="z-40" id={`${index}`}>
+                                    <Tooltip className="z-40" id={`${recipeItem.id}`}>
                                         <div className="flex flex-col">
                                             <span>{matchingItem.name}</span>
                                         </div>
