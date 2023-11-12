@@ -7,6 +7,8 @@ export type ItemProps = {
   image: string;
   level?: number;
   tier?: number;
+  craftable?: boolean;
+  recipe?: { id: number | string; quantity: number; }[];
   quantity?: number;
   category?: string;
 };
@@ -14,6 +16,13 @@ export type ItemProps = {
 export type InventoryItem = ItemProps & {
   quantity?: number;
 };
+
+export type RecipeItem = {
+  id: string;
+  name: string;
+  quantity: number;
+  image: string;
+}
 
 export type MineralProps = {
   name: string;

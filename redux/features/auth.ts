@@ -134,17 +134,28 @@ export const auth = createSlice({
                 state.value.inventory.push(newItem);
             }
         },
-        removeItemFromInventory: (state, action: PayloadAction<ItemProps>) => {
-            const itemIndex = state.value.inventory.findIndex((item) => item.id === action.payload.id);
-            if (itemIndex !== -1) {
-                const currentItem = state.value.inventory[itemIndex];
-                if (currentItem.quantity && currentItem.quantity > 1) {
-                    currentItem.quantity -= 1;
+        removeItemFromInventory: (state, action: PayloadAction<ItemProps | ItemProps[]>) => {
+            const itemsToRemove = Array.isArray(action.payload) ? action.payload : [action.payload];
+        
+            itemsToRemove.forEach(itemToRemove => {
+                const itemIndex = state.value.inventory.findIndex((item) => item.id === itemToRemove.id);
+        
+                if (itemIndex !== -1) {
+                    const currentItem = state.value.inventory[itemIndex];
+        
+                    if (currentItem.quantity !== undefined) {
+                        // Reducir la cantidad según la cantidad especificada en itemToRemove
+                        currentItem.quantity -= itemToRemove.quantity || 1;
+        
+                        // Eliminar el elemento del inventario si la cantidad es menor o igual a cero
+                        if (currentItem.quantity <= 0) {
+                            state.value.inventory.splice(itemIndex, 1);
+                        }
+                    } else {
+                        state.value.inventory.splice(itemIndex, 1);
+                    }
                 }
-                else {
-                    state.value.inventory.splice(itemIndex, 1);
-                }
-            }
+            });
         },
         addInventorySlots: (state, action: PayloadAction<number>) => {
             state.value.inventorySlots += action.payload;

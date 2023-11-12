@@ -14,11 +14,12 @@ const InventoryItem = ({ item }: { item: ItemProps }) => {
     const user = useAppSelector((state) => state.authReducer.value);
 
     const handleRemoveItem = (item: ItemProps) => {
-        dispatch(removeItemFromInventory(item))
-        dispatch(addGold(item.price * 0.8))
-        console.log(user.inventory, "INVENTORY")
-        toast.success(`You sold ${item.name} for ${item.price * 0.8} gold!`)
-    }
+        const itemToRemove: ItemProps = { id: item.id, name: item.name, price: item.price, type: item.type, image: item.image, quantity: 1 };
+        dispatch(removeItemFromInventory(itemToRemove));
+        dispatch(addGold(item.price * 0.8));
+        console.log(user.inventory, "INVENTORY");
+        toast.success(`You sold ${item.name} for ${item.price * 0.8} gold!`);
+    };
 
     const handleOpenChest = () => {
         const chestTier = item.tier;

@@ -54,9 +54,9 @@ const ItemDetail = ({ item }: { item: ItemProps }) => {
                 handleCloseModal();
             }
         };
-    
+
         document.addEventListener("mousedown", handleOutsideClick);
-    
+
         return () => {
             document.removeEventListener("mousedown", handleOutsideClick);
         };
@@ -84,8 +84,8 @@ const ItemDetail = ({ item }: { item: ItemProps }) => {
                 onClose={() => setIsModalOpen(false)}
             >
                 <div
-                ref={modalRef}
-                className="px-6 py-4"
+                    ref={modalRef}
+                    className="px-6 py-4"
                 >
                     <h3 className="text-2xl mb-4 text-center">You&apos;re buying</h3>
                     <div className="flex pb-4 gap-4 flex-col">
