@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import authReducer from './features/auth';
-import flagReducer from './features/flag';
+import isMiningReducer from './features/isMining';
 
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 
 export const store = configureStore({
     reducer: {
         authReducer,
-        flagReducer,
+        isMiningReducer,
     }
 })
 

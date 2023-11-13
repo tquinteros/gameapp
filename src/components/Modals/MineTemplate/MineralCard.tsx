@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/redux/store";
 import { toast } from "react-toastify";
 import { levels } from '@/data/levels';
-import { toggleFlag } from "@/redux/features/flag";
+import { toggleFlag } from "@/redux/features/isMining";
 import { MineralProps } from "@/types/types";
 import { items } from "@/data/items/items";
 
