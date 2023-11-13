@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import authReducer from './features/auth';
 import isMiningReducer from './features/isMining';
+import isWoodcuttingReducer from './features/isWoodcutting';
 
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 
@@ -8,6 +9,7 @@ export const store = configureStore({
     reducer: {
         authReducer,
         isMiningReducer,
+        isWoodcuttingReducer,
     }
 })
 
