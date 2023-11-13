@@ -5,6 +5,7 @@ export const swords = [
         type: "wood",
         category: "sword",
         level: 1,
+        damage: 10,
         craftable: true,
         recipe: [
             {
@@ -23,6 +24,7 @@ export const swords = [
         type: "stone",
         category: "sword",
         level: 2,
+        damage: 20,
         craftable: true,
         recipe: [
             {
@@ -44,7 +46,8 @@ export const swords = [
         name: "Gold Sword",
         type: "gold",
         category: "sword",
-        level: 2,
+        level: 3,
+        damage: 30,
         craftable: true,
         recipe: [
             {

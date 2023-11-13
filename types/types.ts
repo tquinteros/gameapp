@@ -8,6 +8,7 @@ export type ItemProps = {
   level?: number;
   regenerate?: number;
   tier?: number;
+  damage?: number;
   craftable?: boolean;
   recipe?: { id: number | string; quantity: number; }[];
   quantity?: number;

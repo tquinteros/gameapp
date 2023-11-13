@@ -125,6 +125,7 @@ export const auth = createSlice({
                 image: item.image,
                 level: item.level,
                 quantity: quantity,
+                damage: item.damage,
                 regenerate: item.regenerate,
                 category: item.category,
                 tier: item.tier,
