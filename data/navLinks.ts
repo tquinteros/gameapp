@@ -1,7 +1,7 @@
 export const navLinks = [
     {
         name: 'Quests',
-        href: '/app',
+        href: '/app/quests',
     },
 ];
 

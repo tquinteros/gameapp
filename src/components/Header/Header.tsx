@@ -17,12 +17,12 @@ interface ProgressBarProps {
     max?: number;
 }
 
-export const ProgressBar = ({ progress, max }: ProgressBarProps) => {
+export const ProgressBar = ({ progress, max = 100 }: ProgressBarProps) => {
     return (
         <div className="w-full h-6 bg-gray-700 rounded-md">
             <div
                 className="h-full bg-green-700/100 rounded-md"
-                style={{ width: `${progress}%`, maxWidth: `${max}%`, }}
+                style={{ width: `${(progress / max) * 100}%` }}
             ></div>
         </div>
     );

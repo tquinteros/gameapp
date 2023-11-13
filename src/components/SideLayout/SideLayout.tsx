@@ -12,9 +12,13 @@ const SideLayout = () => {
         <div className="max-h-screen test rounded-md z-30 p-2 md:p-4 xl:p-6 col-span-12 md:col-span-3 xl:col-span-2 sticky top-0">
             <div className="mb-8">
                 <h3 className="text-xl text-center mb-2">HP</h3>
-                <div className="relative">
+                <div className="relative max-w-full">
                     <ProgressBar max={user.maxHp} progress={user.hp} />
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2">{user.hp}/{user.maxHp}</div>
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 text-center w-full">
+                        <span className="inline-block  px-2 rounded-md">
+                            {user.hp}/{user.maxHp}
+                        </span>
+                    </div>
                 </div>
             </div>
             <div className="flex flex-col gap-4 mb-8">

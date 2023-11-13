@@ -5,7 +5,7 @@ import { addItemToInventory, removeGold, removeItemFromInventory } from "@/redux
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/redux/store";
 import { toast } from "react-toastify";
-import { ItemProps, RecipeItem } from "@/types/types";
+import { ItemProps } from "@/types/types";
 import { items } from "@/data/items/items";
 
 const CraftingItem = ({ item }: { item: ItemProps }) => {
@@ -24,7 +24,7 @@ const CraftingItem = ({ item }: { item: ItemProps }) => {
                 );
                 return inventoryItem !== undefined;
             });
-    
+
             if (hasIngredients) {
                 const recipeItems: ItemProps[] = item.recipe.map((ingredient) => {
                     const fullItem = items.find((mat) => mat.id === ingredient.id);
@@ -37,12 +37,12 @@ const CraftingItem = ({ item }: { item: ItemProps }) => {
                         quantity: ingredient.quantity || 0,
                     };
                 });
-    
+
                 if (item.tier && user.gold < 100 * item.tier) {
                     toast.error("You don't have enough gold");
                     return;
                 }
-    
+
                 dispatch(addItemToInventory({ item, quantity }));
                 dispatch(removeItemFromInventory(recipeItems));
                 toast.success(`Crafted ${item.name} successfully!`);
@@ -92,7 +92,8 @@ const CraftingItem = ({ item }: { item: ItemProps }) => {
                             console.error(`Item with ID ${recipeItem.id} not found.`);
                             return null;
                         }
-                    })}
+                    })
+                }
             </div>
             <button className="border rounded-md px-2 py-1" onClick={handleCraftItem}>Craft 🟡 {item.tier && (100 * item.tier)}</button>
         </div>

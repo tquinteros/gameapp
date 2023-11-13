@@ -15,7 +15,7 @@ export const swords = [
         tier: 1,
         price: 10,
         description: "A wooden sword.",
-        image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/d/d5/Wooden_Sword_JE2_BE2.png/revision/latest?cb=20200217235747",
+        image: "/items/swords/woodsword.png",
     },
     {
         id: 201,

@@ -25,6 +25,21 @@ export type RecipeItem = {
   image: string;
 }
 
+export interface QuestProps {
+  name: string;
+  description: string;
+  requirements: {
+    item: ItemProps;
+    quantity: number;
+  }[];
+  rewards: {
+    item: ItemProps;
+    quantity: number;
+  }[];
+  isCompleted: boolean;
+  claimed: boolean;
+}
+
 export type MineralProps = {
   name: string;
   materialImg: string;

@@ -66,9 +66,11 @@ const ItemDetail = ({ item }: { item: ItemProps }) => {
         <div
             // onClick={() => handleBuyItem(item, 1)}
             className="flex flex-col gap-1" data-tooltip-place="bottom" data-tooltip-id={`tooltip-${item.id}`}>
-            <Image
-                onClick={() => setIsModalOpen(true)}
-                src={item.image} alt={item.name} className="cursor-pointer" width={50} height={50} />
+            <div className="p-2 test rounded-lg">
+                <Image
+                    onClick={() => setIsModalOpen(true)}
+                    src={item.image} alt={item.name} className="cursor-pointer rounded-md" width={50} height={50} />
+            </div>
             <span>🟡{item.price}</span>
             <Tooltip className="z-40" id={`tooltip-${item.id}`}>
                 <div className="flex flex-col">
