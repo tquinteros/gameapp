@@ -3,11 +3,11 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { addExperience, addLevel, addExperienceSkill, addLevelSkill, addGold, addItemToInventory } from "@/redux/features/auth";
 import { miningLevels } from "@/data/levels";
+import { startMining, stopMining } from "@/redux/features/isMining";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/redux/store";
 import { toast } from "react-toastify";
 import { levels } from '@/data/levels';
-import { toggleFlag } from "@/redux/features/flag";
 import { MineralProps } from "@/types/types";
 import { items } from "@/data/items/items";
 
@@ -17,8 +17,7 @@ const MineralCard = ({ mineral }: { mineral: MineralProps }) => {
     const dispatch = useDispatch();
     const [isWorking, setIsWorking] = useState(false);
     const user = useAppSelector((state) => state.authReducer.value);
-    const flagValue = useAppSelector((state) => state.flagReducer.enabled);
-
+    const isMining = useAppSelector((state) => state.isMiningReducer.isMining);
     const [progress, setProgress] = useState(0);
 
     const findUserSkill = (skillName: string) => {
@@ -56,6 +55,7 @@ const MineralCard = ({ mineral }: { mineral: MineralProps }) => {
         const currentMiningLevel = miningSkill.level;
         const currentMiningExperience = miningSkill.experience;
         const currentMiningLevelThreshold = miningLevels[currentMiningLevel - 1].experience;
+        dispatch(startMining());
 
         if (currentMiningExperience + experience >= currentMiningLevelThreshold) {
             let currentProgress = 0;
@@ -79,6 +79,7 @@ const MineralCard = ({ mineral }: { mineral: MineralProps }) => {
                         return;
                     }
                     dispatch(addItemToInventory({ item: givenItem, quantity: 1 }));
+                    dispatch(stopMining());
                     toast.success(`+1 ${givenItem.name}`, {
                         position: "bottom-center",
                         icon: () => <Image src={givenItem.image} width={25} height={25} alt={givenItem.name} />
@@ -115,6 +116,7 @@ const MineralCard = ({ mineral }: { mineral: MineralProps }) => {
                         return;
                     }
                     dispatch(addItemToInventory({ item: givenItem, quantity: 1 }));
+                    dispatch(stopMining());
                     toast.success(`+1 ${givenItem.name}`, {
                         position: "bottom-center",
                         icon: () => <Image src={givenItem.image} width={25} height={25} alt={givenItem.name} />
@@ -150,8 +152,8 @@ const MineralCard = ({ mineral }: { mineral: MineralProps }) => {
                 <div className="h-full bg-green-700/100" style={{ width: `${progress}%` }}></div>
             </div>
             <button
-                disabled={progress > 0 || flagValue}
-                className={`w-full hover:opacity-75 duration-300 py-2 test text-white rounded ${progress > 0 ? "opacity-50 cursor-not-allowed" : ""}`} onClick={() => handleAddMiningExperience(mineral.experience, mineral.delay)}>Mine
+                disabled={progress > 0 || isMining}
+                className={`w-full duration-300 py-2 test text-white rounded ${progress > 0 || isMining ? "opacity-50 cursor-not-allowed" : "hover:opacity-75"}`} onClick={() => handleAddMiningExperience(mineral.experience, mineral.delay)}>Mine
             </button>
         </div>
     )
