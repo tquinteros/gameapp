@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/redux/store";
 import { toast } from "react-toastify";
 import { levels } from '@/data/levels';
-import { toggleFlag } from "@/redux/features/isMining";
 import { MineralProps } from "@/types/types";
 import { items } from "@/data/items/items";
 
@@ -17,7 +16,6 @@ const MineralCard = ({ mineral }: { mineral: MineralProps }) => {
     const dispatch = useDispatch();
     const [isWorking, setIsWorking] = useState(false);
     const user = useAppSelector((state) => state.authReducer.value);
-    const flagValue = useAppSelector((state) => state.flagReducer.enabled);
 
     const [progress, setProgress] = useState(0);
 
@@ -150,7 +148,7 @@ const MineralCard = ({ mineral }: { mineral: MineralProps }) => {
                 <div className="h-full bg-green-700/100" style={{ width: `${progress}%` }}></div>
             </div>
             <button
-                disabled={progress > 0 || flagValue}
+                disabled={progress > 0}
                 className={`w-full hover:opacity-75 duration-300 py-2 test text-white rounded ${progress > 0 ? "opacity-50 cursor-not-allowed" : ""}`} onClick={() => handleAddMiningExperience(mineral.experience, mineral.delay)}>Mine
             </button>
         </div>
