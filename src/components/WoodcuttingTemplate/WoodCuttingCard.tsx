@@ -52,6 +52,7 @@ const WoodCuttingCard = ({ mineral }: { mineral: MineralProps }) => {
         const currentMiningExperience = skill.experience;
         const currentMiningLevelThreshold = miningLevels[currentMiningLevel - 1].experience;
         dispatch(startWoodcutting());
+        
         if (currentMiningExperience + experience >= currentMiningLevelThreshold) {
             let currentProgress = 0;
             const interval = setInterval(() => {
