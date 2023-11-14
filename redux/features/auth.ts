@@ -170,6 +170,19 @@ export const auth = createSlice({
         healthHp: (state, action: PayloadAction<number>) => {
             state.value.hp += action.payload;
         },
+        editUser: (state, action: PayloadAction<{ username: string; isAdmin: boolean; level: number; gold: number; experience: number; skillsLevels: SkillLevel[]; inventory: InventoryItem[]; inventorySlots: number; hp: number; maxHp: number; }>) => {
+            const { username, isAdmin, level, experience, skillsLevels, gold, inventory, inventorySlots, hp, maxHp } = action.payload;
+            state.value.username = username;
+            state.value.isAdmin = isAdmin;
+            state.value.level = level;
+            state.value.experience = experience;
+            state.value.skillsLevels = skillsLevels;
+            state.value.gold = gold;
+            state.value.inventory = inventory;
+            state.value.inventorySlots = inventorySlots;
+            state.value.hp = hp;
+            state.value.maxHp = maxHp;
+        },
     },
 });
 
@@ -186,5 +199,6 @@ export const { logIn,
     removeItemFromInventory,
     addInventorySlots,
     healthHp,
+    editUser,
 } = auth.actions;
 export default auth.reducer;

@@ -23,4 +23,16 @@ export const potions = [
         description: "A medium health potion.",
         image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/3/3e/Potion_of_Healing_JE2_BE2.png/revision/latest?cb=20191027040649",
     },
+    {
+        id: 11103,
+        name: "Full Health Potion",
+        type: "health",
+        category: "potion",
+        level: 2,
+        tier: 3,
+        regenerate: 1000000,
+        price: 50,
+        description: "A full health potion.",
+        image: "https://static.wikia.nocookie.net/minecraft_gamepedia/images/3/3e/Potion_of_Healing_JE2_BE2.png/revision/latest?cb=20191027040649",
+    },
 ];
