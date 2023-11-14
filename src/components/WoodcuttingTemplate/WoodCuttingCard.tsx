@@ -8,14 +8,13 @@ import { useAppSelector } from "@/redux/store";
 import { toast } from "react-toastify";
 import { levels } from '@/data/levels';
 import { MineralProps } from "@/types/types";
-
+import { startWoodcutting, stopWoodcutting } from "@/redux/features/isWoodcutting";
 const WoodCuttingCard = ({ mineral }: { mineral: MineralProps }) => {
 
 
     const dispatch = useDispatch();
-    const [isWorking, setIsWorking] = useState(false);
     const user = useAppSelector((state) => state.authReducer.value);
-
+    const isWoodcutting = useAppSelector((state) => state.isWoodcuttingReducer.isWoodcutting);
     const [progress, setProgress] = useState(0);
 
     const findUserSkill = (skillName: string) => {
@@ -52,7 +51,7 @@ const WoodCuttingCard = ({ mineral }: { mineral: MineralProps }) => {
         const currentMiningLevel = skill.level;
         const currentMiningExperience = skill.experience;
         const currentMiningLevelThreshold = miningLevels[currentMiningLevel - 1].experience;
-
+        dispatch(startWoodcutting());
         if (currentMiningExperience + experience >= currentMiningLevelThreshold) {
             let currentProgress = 0;
             const interval = setInterval(() => {
@@ -69,6 +68,7 @@ const WoodCuttingCard = ({ mineral }: { mineral: MineralProps }) => {
                     } else {
                         dispatch(addExperience(1));
                     }
+                    dispatch(stopWoodcutting());
                     setProgress(0);
                 }
             }, delay / 100);
@@ -94,6 +94,7 @@ const WoodCuttingCard = ({ mineral }: { mineral: MineralProps }) => {
                     if (randomValue <= mineral.percentageGold) {
                         dispatch(addGold(1));
                     }
+                    dispatch(stopWoodcutting());
                     setProgress(0);
                 }
             }, delay / 100);
@@ -125,8 +126,8 @@ const WoodCuttingCard = ({ mineral }: { mineral: MineralProps }) => {
                 <div className="h-full bg-green-700/100" style={{ width: `${progress}%` }}></div>
             </div>
             <button
-                disabled={progress > 0}
-                className={`w-full hover:opacity-75 duration-300 py-2 test text-white rounded ${progress > 0 ? "opacity-50 cursor-not-allowed" : ""}`} onClick={() => handleAddMiningExperience(mineral.experience, mineral.delay)}>Mine
+                disabled={progress > 0 || isWoodcutting}
+                className={`w-full hover:opacity-75 duration-300 py-2 test text-white rounded ${progress > 0 || isWoodcutting ? "opacity-50 cursor-not-allowed" : ""}`} onClick={() => handleAddMiningExperience(mineral.experience, mineral.delay)}>Mine
             </button>
         </div>
     )
