@@ -81,8 +81,13 @@ const InventoryItem = ({ item }: { item: ItemProps }) => {
                         <span>{item.name}</span>
                         {item.tier && <span>Tier {item.tier}</span>}
                         {
-                            item.regenerate && item.type === "health" && (
+                            item.regenerate && item.type === "health" && item.regenerate < 99999 && (
                                 <span>Regenerate {item.regenerate} HP</span>
+                            )
+                        }
+                        {
+                            item.regenerate && item.type === "health" && item.regenerate > 99999 && (
+                                <span>Regenerate 100% HP</span>
                             )
                         }
                         {

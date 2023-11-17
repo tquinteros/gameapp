@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect } from "react"
 import { toast } from "react-toastify";
 import CraftingTemplate from "@/src/components/CraftingTemplate/CraftingTemplate";
+import { NextUIProvider } from "@nextui-org/react";
 
 export default function Home() {
 
@@ -21,7 +22,9 @@ export default function Home() {
 
   return (
     <AppLayout>
-      <CraftingTemplate />
+      <NextUIProvider>
+        <CraftingTemplate />
+      </NextUIProvider>
     </AppLayout>
   )
 }

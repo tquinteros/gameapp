@@ -73,3 +73,14 @@ export interface InputProps {
   className?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
+
+export interface CreatureProps {
+  name: string;
+  health: number;
+  attack: number;
+  defense: number;
+  speed: number;
+  experience: number;
+  gold: number;
+  image: string;
+}
