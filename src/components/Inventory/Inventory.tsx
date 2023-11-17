@@ -1,3 +1,4 @@
+"use client"
 import { useAppSelector } from "@/redux/store";
 import React, { useState } from "react";
 import InventoryItem from "./InventoryItem.tsx/InventoryItem";
@@ -38,7 +39,9 @@ const InventoryTemplate = () => {
     return (
         <div>
             <div className="flex items-center justify-between">
-                <h3 className="text-xl text-center uppercase">Inventory</h3>
+                <h3 className="text-xl uppercase">
+                    {user.inventory.length} / {user.inventorySlots}
+                </h3>
                 <div className="flex flex-col gap-1 items-center">
                     {
                         user.inventorySlots < 100 ? (
@@ -55,9 +58,6 @@ const InventoryTemplate = () => {
                     }
                 </div>
             </div>
-            <h3 className="text-xl uppercase">
-                {user.inventory.length} / {user.inventorySlots}
-            </h3>
             <div className="flex flex-wrap justify-center items-center gap-4 mt-8">
                 {
                     user.inventory.map((item, index) => {

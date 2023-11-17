@@ -5,7 +5,6 @@ import { useAppSelector } from "@/redux/store";
 import { ProgressBar } from "../Header/Header";
 
 const SideLayout = () => {
-
     const user = useAppSelector((state) => state.authReducer.value);
 
     return (

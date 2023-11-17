@@ -5,6 +5,7 @@ import InventoryTemplate from "@/src/components/Inventory/Inventory";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react"
 import { toast } from "react-toastify";
+import { NextUIProvider } from "@nextui-org/react";
 
 
 export default function Home() {
@@ -23,7 +24,9 @@ export default function Home() {
 
   return (
     <AppLayout>
-      <InventoryTemplate />
+      <NextUIProvider>
+        <InventoryTemplate />
+      </NextUIProvider>
     </AppLayout>
   )
 }
